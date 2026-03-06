@@ -60,7 +60,7 @@
 ## 品牌底线（与 core 一致）
 
 - **产品**：VAPOR SL · From 9.9kg + Ultra-lightweight e-Gravel DNA（重量/续航以 core 宣发口径为准）· 德国 Mönchengladbach 可试驾。
-- **禁用词**：600W / certified / road legal / CE / 「便宜」「性价比」。
+- **禁用词**：certified / road legal / CE / 「便宜」「性价比」。600W peak performance 可出现，建议与 250W rated 同写。
 - **重量口径**：宣传/Buzz 用 From 9.9kg；Dealer 客户直接问重量时用 core 坦诚话术 11–12kg。
 - **竞品锚点**：Specialized €12,000+ / Trek €10,000+。
 - **信任锚点**：Deruiz 合作 · 德国实体仓库 · Mönchengladbach 试驾。

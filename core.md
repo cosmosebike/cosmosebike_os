@@ -4,7 +4,8 @@
 
 **本文件为内部文档，不直接对外照念。** 对外沟通要**人情世故、高情商、有分寸**——根据对象与场景把人话说好，该模糊的模糊、该保留的保留，不裸报内部数字/时间/用词；具体「说与不说、说多少」由各 Agent 判断。
 
-由 **Mia 直接管理，Coach 辅助**。
+由 **Mia 直接管理，Coach 辅助**。  
+**Mia**：mia.wang@cosmosebike.com — 欧洲市场负责人，日常派活/决策对接。
 
 ---
 
@@ -171,10 +172,35 @@ Shimano 105 BR-R7170 液压碟刹；碟片 Tektro Center Lock 160mm 前/后。
 
 ---
 
+## KOL/博主 核心合作名单（Buzz 必读）
+
+| 名称 | 平台 | 说明 | 详细简报 |
+|------|------|------|----------|
+| **Felix testet Bikes**（Felix Kuffner） | YouTube @FelixtestetBikes · gravelgrind.de · IG felixtestetbikes | 德语区 gravel/ e-road 测评，约 4 万+ 订阅；前 BMX 德国冠军、前 Fazua 营销；主频道聚焦 gravel/公路/allroad，与 VAPOR SL 定位高度匹配。**核心合作博主。** | `docs/buzz-kol-felix-testet-bikes.md` |
+| **Velomotion Magazin** | YouTube @VelomotionMagazin · velomotion.de | 德语区骑行杂志（Gravel / MTB / Road / E-Bike）；YouTube 体量小，以 **网站与杂志稿** 为主。适合 PR、新闻稿、试驾报道与媒体背书，与 Felix 创作者长测互补。 | `docs/buzz-kol-velomotion-magazin.md` |
+| **ENJOY YOUR BIKE** | YouTube @ENJOYYOURBIKE | 德语区骑行头部频道（订阅量以频道页为准）；含 e-gravel、公路、电助力测评。适合 **媒体关系与曝光**，合作需更正式（PR、展会/媒体计划），与 Felix 送测长测互补。 | `docs/buzz-kol-enjoy-your-bike.md` |
+| **David Arthur** | YouTube @davidarthur · davidarthur.co.uk | **英语区**（英国为主）骑行测评，e-bike / gravel / 公路；诚实向测评。与德语区 Felix 互补，适合英国/国际曝光与送测。订阅量以频道页为准。 | `docs/buzz-kol-david-arthur.md` |
+| **Bikepacker / Javier Bañón Izu** | YouTube @bikepacker_javibaiz · javierbaonizu.es | **西语区**（西班牙为主）gravel / bikepacking / e-gravel；记者+《Bikepacking 手册》作者。有 e-gravel 实测（如 Topstone Neo SL），与 Felix/David 互补。订阅量以频道页为准。 | `docs/buzz-kol-bikepacker-javibaiz.md` |
+| **Mammoth Bikes / Mundo Mammoth** | YouTube @Mammoth_Bikes · mammothbikes.com | **西语区**（西班牙）骑行教育+测评大号，兼零售商（线上+实体店）。含 e-bike、gravel、MTB、公路。适合媒体露出或零售合作洽谈。订阅量以频道页为准。 | `docs/buzz-kol-mammoth-bikes.md` |
+
+---
+
+## 官网、社媒与联系
+
+| 项目 | 内容 |
+|------|------|
+| 官网 | www.cosmosebike.com |
+| Instagram / YouTube / Facebook | 同名 cosmosebike |
+| 对外联系邮箱 | info@cosmosebike.com |
+| **Mia（欧洲市场负责人，日常派活）** | mia.wang@cosmosebike.com |
+
+---
+
 ## 品牌底线（对外必守）
 
 - **认证状态**：无 CE/EN15194 认证 — 文案须规避法规敏感词（不出现 road legal、certified 等）
-- **禁用词**：600W / certified / road legal / CE / 「便宜」「性价比」等低端词
+- **禁用词**：certified / road legal / CE / 「便宜」「性价比」等低端词（600W 可出现，见下）
+- **功率表述（欧洲/英文）**：产品额定 250W、600W 为 peak performance；**600W peak performance 可以出现**。建议与 250W rated 或 85Nm precision mid-drive 同时/优先体现，避免被误读。法规背景见 `docs/eu-ebike-power-wording.md`。
 - **信任锚点**：Deruiz 合作 · 德国实体仓库 · Mönchengladbach 试驾
 - **对外话术**：European-standard performance, factory-direct pricing（不主动提「中国品牌」）
 

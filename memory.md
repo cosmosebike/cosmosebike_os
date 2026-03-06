@@ -25,7 +25,8 @@
 | 风险 | 我们的处理 |
 |------|------------|
 | 无 CE 认证 | 不主动提认证，文案不出现 "road legal" "certified" 等词 |
-| 600W 在欧盟 | 只用 "250W rated, EU compliant"，600W 仅内部/中文使用 |
+| 600W 在欧盟 | 可写 600W peak performance；建议同时写 250W rated 或 85Nm，避免误读 |
+| Coach 信息核实 | 对外/KOL/渠道数据须 cross-check、有来源；不确定就备注「来源未核实/可能不准」 |
 | Bafang=DIY 印象 | 对外用 "precision mid-drive system"，不强调 Bafang 名字 |
 | 零品牌知名度 | 所有物料突出 Deruiz 合作 + 实体地址，建立本地信任 |
 | 续航夸大 | 始终用「诚实版」数据 + 条件注释，主打 120km |

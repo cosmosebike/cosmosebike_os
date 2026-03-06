@@ -18,7 +18,7 @@
 | 重量 | from 9.9kg | 9.9KG + Toray T800 + 单手可举 | ✓ |
 | 续航 | 诚实 120km | 120KM + "Honest Real-World Range" | ✓ |
 | 试驾 | Deruiz · Mönchengladbach | "Available for test rides & pickup at Deruiz Showroom · Mönchengladbach, Germany" | ✓ |
-| 禁用词 | 无 600W / certified / road legal / CE | 未出现 | ✓ |
+| 禁用词 | 无 certified / road legal / CE；600W 可出现（建议配 250W rated） | 按 core 功率表述 | ✓ |
 | 合规表述 | 不出现 certified 等 | 用了 "EU compliant" | ⚠️ 灰色：core 写「规避法规敏感词」；"EU compliant" 比 "certified" 弱，媒体常用。若严格保守可删或改为不写；否则保留并注明对外追问时以 core 口径回应 |
 | 竞品叙事 | €5,000 less、status quo | "Same Toray carbon. Same Shimano 105 Di2. €5,000 less than the €10,000+ status quo" | ✓ |
 | 对外话术 | European-standard, factory-direct | "European-standard performance direct from the factory"、"kill the middleman tax" | ✓ |
