@@ -6,137 +6,158 @@
   <title>VAPOR SL — Founder's Edition | Cosmosebike</title>
   <meta name="description" content="Das leichteste e-Gravel, das du wirklich kaufen kannst. 85Nm · Shimano 105 Di2 · Carbon · ab €4,999. Jetzt in Deutschland verfügbar.">
 
+  <!-- Fonts: 与 landing_page 全站统一 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@200;300;400;500;600&family=Sofia+Sans+Condensed:wght@600;700;800;900&display=swap" rel="stylesheet">
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
   <style>
+    /* ─── 全站字体（与 landing_page 一致） ─── */
     :root {
-      --black: #080808;
-      --warm-white: #F0EDE8;
-      --brick: #E84A2E;
-      --gold: #C8B89A;
+      --black: #000;
+      --warm-white: #fff;
+      --accent: #3b82f6;
       --mid-gray: #2a2a2a;
-      --text-muted: #888;
+      --text-muted: #6b7280;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: var(--black); color: var(--warm-white); font-family: 'Barlow', sans-serif; font-weight: 300; -webkit-font-smoothing: antialiased; }
-    .font-display { font-family: 'Barlow Condensed', sans-serif; }
-    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .nav-sticky { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(8,8,8,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(240,237,232,0.08); }
+    body { background: var(--black); color: var(--warm-white); font-family: 'Geologica', sans-serif; font-weight: 300; -webkit-font-smoothing: antialiased; }
+    .font-heading { font-family: 'Sofia Sans Condensed', sans-serif; }
+    .font-body { font-family: 'Geologica', sans-serif; }
+    .font-display { font-family: 'Sofia Sans Condensed', sans-serif; } /* 保留兼容 */
+
+    /* 区块上浮渐显（与英页统一类名） */
+    .reveal-section { opacity: 0; transform: translateY(40px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+    .reveal-section.is-visible { opacity: 1; transform: translateY(0); }
+
+    .hover-card-zoom { transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .group:hover .hover-card-zoom { transform: scale(1.05); }
+
     .thumb { opacity: 0.45; cursor: pointer; transition: opacity 0.2s; border: 1px solid transparent; }
-    .thumb.active, .thumb:hover { opacity: 1; border-color: var(--gold); }
-    .variant-btn { border: 1px solid rgba(240,237,232,0.2); color: var(--warm-white); padding: 10px 18px; font-family: 'Barlow Condensed', sans-serif; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; background: transparent; }
-    .variant-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .thumb.active, .thumb:hover { opacity: 1; border-color: var(--accent); }
+    .variant-btn { border: 1px solid rgba(255,255,255,0.2); color: var(--warm-white); padding: 10px 18px; font-family: 'Sofia Sans Condensed', sans-serif; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; background: transparent; }
+    .variant-btn:hover { border-color: var(--accent); color: var(--accent); }
     .variant-btn.selected { background: var(--warm-white); color: var(--black); border-color: var(--warm-white); }
     .variant-btn.sold-out { opacity: 0.3; cursor: not-allowed; text-decoration: line-through; }
-    .btn-primary { background: var(--warm-white); color: var(--black); font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 18px 32px; width: 100%; border: none; cursor: pointer; transition: background 0.2s, transform 0.1s; display: block; text-align: center; text-decoration: none; }
-    .btn-primary:hover { background: var(--gold); transform: translateY(-1px); }
+    .btn-primary { background: var(--warm-white); color: var(--black); font-family: 'Sofia Sans Condensed', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 18px 32px; width: 100%; border: none; cursor: pointer; transition: background 0.2s, transform 0.1s; display: block; text-align: center; text-decoration: none; }
+    .btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
     .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-    .btn-secondary { background: transparent; color: var(--warm-white); border: 1px solid rgba(240,237,232,0.3); font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 14px 24px; cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-block; text-align: center; }
-    .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
-    .tab-btn { border-bottom: 2px solid transparent; padding: 12px 0; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; color: var(--text-muted); font-family: 'Barlow Condensed', sans-serif; background: none; border: none; border-bottom: 2px solid transparent; }
-    .tab-btn.active { color: var(--warm-white); border-bottom: 2px solid var(--gold); }
-    .spec-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid rgba(240,237,232,0.07); font-size: 14px; }
+    .btn-secondary { background: transparent; color: var(--warm-white); border: 1px solid rgba(255,255,255,0.3); font-family: 'Sofia Sans Condensed', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 14px 24px; cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-block; text-align: center; }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+    .tab-btn { border-bottom: 2px solid transparent; padding: 12px 0; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; color: var(--text-muted); font-family: 'Sofia Sans Condensed', sans-serif; background: none; border: none; }
+    .tab-btn.active { color: var(--warm-white); border-bottom: 2px solid var(--accent); }
+    .spec-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.07); font-size: 14px; }
     .spec-label { color: var(--text-muted); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
     .spec-value { color: var(--warm-white); text-align: right; max-width: 60%; }
-    .stat-num { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(48px, 8vw, 80px); font-weight: 900; line-height: 0.9; }
-    .stat-unit { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 400; color: var(--gold); }
+    .stat-num { font-family: 'Sofia Sans Condensed', sans-serif; font-size: clamp(48px, 8vw, 80px); font-weight: 900; line-height: 0.9; }
+    .stat-unit { font-family: 'Sofia Sans Condensed', sans-serif; font-size: 20px; font-weight: 400; color: var(--accent); }
     .stat-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-top: 8px; }
     .stock-dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; display: inline-block; margin-right: 8px; animation: pulse 2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-    .divider { border: none; border-top: 1px solid rgba(240,237,232,0.08); margin: 0; }
+    .divider { border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 0; }
     table { border-collapse: collapse; }
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: var(--black); }
     ::-webkit-scrollbar-thumb { background: var(--mid-gray); }
+
+    /* 语言切换：当前语言高亮 */
+    .lang-switcher a.active { color: #fff; border-bottom: 1px solid rgba(255,255,255,0.5); }
+    .lang-switcher a:not(.active) { color: rgba(255,255,255,0.5); }
   </style>
 </head>
 
 <body x-data="vaporSL()" x-init="init()">
 
-  <!-- ═══ NAV ═══ -->
-  <nav class="nav-sticky">
-    <div style="max-width:1280px;margin:0 auto;padding:16px 24px;display:flex;justify-content:space-between;align-items:center;">
-      <a href="/" style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--warm-white);text-decoration:none;">Cosmosebike</a>
-      <a href="#vorbestellen" class="btn-primary" style="width:auto;padding:10px 24px;font-size:13px;">Jetzt vorbestellen</a>
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- 全站统一 HEADER：渐变透明，固定顶部，与 landing_page 同版式，含 EN/DE -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <nav class="fixed w-full z-50 top-0 py-6 bg-gradient-to-b from-black/90 to-transparent pointer-events-none">
+    <div class="max-w-7xl mx-auto px-6 flex justify-between items-center pointer-events-auto">
+      <a href="landing_page-de.html" class="block hover:opacity-80 transition-opacity" aria-label="Cosmosebike">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0999/0694/5363/files/Group_3.png?v=1768738492"
+          alt="Cosmosebike"
+          class="h-4 md:h-5 w-auto object-contain invert"
+        >
+      </a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#vorbestellen" class="text-sm font-heading font-bold uppercase tracking-widest hover:text-blue-400 transition text-gray-300">Galerie</a>
+        <a href="#specs" class="text-sm font-heading font-bold uppercase tracking-widest hover:text-blue-400 transition text-gray-300">Features</a>
+        <a href="#story" class="text-sm font-heading font-bold uppercase tracking-widest hover:text-blue-400 transition text-gray-300">Unsere Story</a>
+        <a href="#vorbestellen" class="bg-white text-black px-8 py-2 rounded-full text-sm font-heading font-bold uppercase tracking-widest hover:bg-blue-600 hover:text-white transition inline-block">
+          Jetzt vorbestellen
+        </a>
+        <span class="lang-switcher flex items-center gap-2 text-sm font-heading font-bold uppercase tracking-widest">
+          <a href="vapor-sl-en.html" class="hover:text-blue-400 transition">EN</a>
+          <span class="text-gray-500">|</span>
+          <a href="vapor-sl-de.html" class="active">DE</a>
+        </span>
+      </div>
     </div>
   </nav>
 
-  <!-- ═══ PRODUKT HAUPTBEREICH ═══ -->
-  <section style="padding-top:80px;background:var(--black);">
-    <div style="max-width:1280px;margin:0 auto;padding:48px 24px 80px;">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;" class="product-grid">
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- 主内容：产品图 + 购买区（颜色/尺码/预购 CTA） -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <section class="pt-24 bg-black" id="top">
+    <div class="max-w-7xl mx-auto px-6 py-12 md:py-16 pb-20">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start product-grid">
 
-        <!-- LINKS: Bildergalerie -->
-        <div class="reveal">
-          <div style="position:relative;overflow:hidden;background:#111;aspect-ratio:4/3;">
-            <img :src="images[activeImage]" alt="VAPOR SL" style="width:100%;height:100%;object-fit:cover;transition:opacity 0.4s;">
-            <div style="position:absolute;top:16px;left:16px;background:rgba(8,8,8,0.85);border:1px solid rgba(200,184,154,0.3);padding:6px 14px;">
-              <span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);">Batch 01 · Founder's Edition</span>
-            </div>
+        <!-- 左侧：主图 + 缩略图（images 数组见底部 script） -->
+        <div class="reveal-section">
+          <div class="relative overflow-hidden bg-[#111] aspect-[4/3] group">
+            <img :src="images[activeImage]" alt="VAPOR SL" class="hover-card-zoom w-full h-full object-cover transition-opacity duration-400">
           </div>
-          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px;">
+          <div class="grid grid-cols-4 gap-2 mt-2">
             <template x-for="(img, i) in images" :key="i">
-              <div class="thumb" :class="{active: activeImage === i}" @click="activeImage = i" style="aspect-ratio:1;background:#111;overflow:hidden;">
-                <img :src="img" style="width:100%;height:100%;object-fit:cover;">
+              <div class="thumb group aspect-square bg-[#111] overflow-hidden" :class="{active: activeImage === i}" @click="activeImage = i">
+                <img :src="img" alt="" class="hover-card-zoom w-full h-full object-cover">
               </div>
             </template>
           </div>
         </div>
 
-        <!-- RECHTS: Produktinfo + Kauf -->
-        <div class="reveal" style="transition-delay:0.15s" id="vorbestellen">
-
-          <!-- Badge -->
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
-            <span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);">Cosmosebike</span>
-            <span style="color:var(--mid-gray);">·</span>
-            <span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);">
+        <!-- 右侧：标题、价格、选配、CTA -->
+        <div class="reveal-section transition-delay-150" style="transition-delay: 0.15s" id="vorbestellen">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="font-heading text-[11px] tracking-[0.2em] uppercase text-[var(--text-muted)]">Cosmosebike</span>
+            <span class="text-[var(--mid-gray)]">·</span>
+            <span class="font-heading text-[11px] tracking-[0.15em] uppercase text-[var(--accent)]">
               <span class="stock-dot"></span>
               <span x-text="stockLeft + ' von 20 verfügbar'"></span>
             </span>
           </div>
+          <h1 class="font-heading font-black uppercase text-4xl md:text-5xl lg:text-6xl leading-tight tracking-tight mb-2">VAPOR SL</h1>
+          <p class="font-heading font-light uppercase tracking-[0.2em] text-[15px] text-[var(--accent)] mb-8">Ultra-lightweight e-Gravel</p>
 
-          <!-- Titel -->
-          <h1 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;text-transform:uppercase;font-size:clamp(40px,5vw,64px);line-height:0.95;letter-spacing:-0.01em;margin-bottom:8px;">VAPOR SL</h1>
-          <p style="font-family:'Barlow Condensed',sans-serif;font-weight:300;text-transform:uppercase;letter-spacing:0.2em;font-size:15px;color:var(--gold);margin-bottom:32px;">Ultra-lightweight e-Gravel</p>
-
-          <!-- Preis -->
-          <div style="margin-bottom:32px;">
-            <div style="display:flex;align-items:baseline;gap:16px;">
-              <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:42px;">€4.999</span>
-              <span style="font-family:'Barlow Condensed',sans-serif;font-size:18px;color:var(--text-muted);text-decoration:line-through;">€5.199</span>
+          <div class="mb-8">
+            <div class="flex items-baseline gap-4">
+              <span class="font-heading font-black text-[42px]">€4.999</span>
+              <span class="font-heading text-lg text-[var(--text-muted)] line-through">€5.199</span>
             </div>
-            <p style="font-size:13px;margin-top:4px;color:var(--gold);">Founder's Edition · €200 Ersparnis</p>
+            <p class="text-[13px] mt-1 text-[var(--accent)]">Founder's Edition · €200 Ersparnis</p>
           </div>
 
-          <hr class="divider" style="margin-bottom:32px;">
+          <hr class="divider mb-8">
 
-          <!-- Farbe -->
-          <div style="margin-bottom:24px;">
-            <p style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px;">
-              Farbe: <span x-text="selectedColor" style="color:var(--warm-white);"></span>
-            </p>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <div class="mb-6">
+            <p class="font-heading text-[11px] tracking-[0.2em] uppercase text-[var(--text-muted)] mb-3">Farbe: <span x-text="selectedColor" class="text-[var(--warm-white)]"></span></p>
+            <div class="flex gap-2 flex-wrap">
               <template x-for="color in colors" :key="color.name">
                 <button class="variant-btn" :class="{selected: selectedColor === color.name}" @click="selectedColor = color.name" x-text="color.label"></button>
               </template>
             </div>
           </div>
 
-          <!-- Größe -->
-          <div style="margin-bottom:32px;">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-              <p style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);">
-                Größe: <span x-text="selectedSize" style="color:var(--warm-white);"></span>
-              </p>
-              <a href="#geometrie" style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);text-decoration:underline;">Größentabelle ↓</a>
+          <div class="mb-8">
+            <div class="flex justify-between items-center mb-3">
+              <p class="font-heading text-[11px] tracking-[0.2em] uppercase text-[var(--text-muted)]">Größe: <span x-text="selectedSize" class="text-[var(--warm-white)]"></span></p>
+              <a href="#geometrie" class="font-heading text-[11px] tracking-[0.1em] uppercase text-[var(--accent)] underline">Größentabelle ↓</a>
             </div>
-            <div style="display:flex;gap:8px;">
+            <div class="flex gap-2">
               <template x-for="size in sizes" :key="size.name">
                 <button class="variant-btn"
                   :class="{selected: selectedSize === size.name, 'sold-out': !isAvailable(selectedColor, size.name)}"
@@ -148,123 +169,95 @@
             </div>
           </div>
 
-          <!-- Anzahlung Logik -->
-          <div style="margin-bottom:24px;padding:20px;background:rgba(200,184,154,0.06);border:1px solid rgba(200,184,154,0.15);">
-            <p style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">Vorbestellung</p>
-            <div style="display:flex;flex-direction:column;gap:8px;font-size:14px;">
-              <div style="display:flex;justify-content:space-between;">
-                <span style="color:var(--text-muted);">Anzahlung heute</span>
-                <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;">€800</span>
-              </div>
-              <div style="display:flex;justify-content:space-between;">
-                <span style="color:var(--text-muted);">Wird angerechnet als</span>
-                <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:var(--gold);">€1.000</span>
-              </div>
-              <div style="display:flex;justify-content:space-between;">
-                <span style="color:var(--text-muted);">Restbetrag bei Lieferung</span>
-                <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;">€3.999</span>
-              </div>
-              <hr class="divider" style="margin:8px 0;">
-              <div style="display:flex;justify-content:space-between;">
-                <span style="color:var(--text-muted);">Gesamtpreis</span>
-                <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;">€4.999</span>
-              </div>
+          <div class="mb-6 p-5 bg-blue-500/10 border border-blue-500/20 rounded">
+            <p class="font-heading text-[11px] tracking-[0.2em] uppercase text-[var(--accent)] mb-3">Vorbestellung</p>
+            <div class="flex flex-col gap-2 text-sm">
+              <div class="flex justify-between"><span class="text-[var(--text-muted)]">Anzahlung heute</span><span class="font-heading font-bold">€800</span></div>
+              <div class="flex justify-between"><span class="text-[var(--text-muted)]">Wird angerechnet als</span><span class="font-heading font-bold text-[var(--accent)]">€1.000</span></div>
+              <div class="flex justify-between"><span class="text-[var(--text-muted)]">Restbetrag bei Lieferung</span><span class="font-heading font-bold">€3.999</span></div>
+              <hr class="divider my-2">
+              <div class="flex justify-between"><span class="text-[var(--text-muted)]">Gesamtpreis</span><span class="font-heading font-bold text-base">€4.999</span></div>
             </div>
           </div>
 
-          <!-- CTA -->
           <template x-if="isAvailable(selectedColor, selectedSize)">
-            <a :href="getPaypalUrl()" target="_blank" class="btn-primary" style="margin-bottom:12px;">
-              Jetzt vorbestellen — €800 Anzahlung
-            </a>
+            <a :href="getPaypalUrl()" target="_blank" class="btn-primary mb-3">Jetzt vorbestellen — €800 Anzahlung</a>
           </template>
           <template x-if="!isAvailable(selectedColor, selectedSize)">
-            <button class="btn-primary" disabled style="margin-bottom:12px;">
-              Diese Konfiguration ist nicht verfügbar
-            </button>
+            <button class="btn-primary mb-3" disabled>Diese Konfiguration ist nicht verfügbar</button>
           </template>
 
-          <a href="https://cosmosebike.com/test-ride" class="btn-secondary" style="width:100%;margin-bottom:24px;">
-            Probefahrt buchen — Mönchengladbach
-          </a>
+          <a href="https://cosmosebike.com/test-ride" class="btn-secondary w-full mb-6 block text-center">Probefahrt buchen — Mönchengladbach</a>
 
-          <!-- Trust -->
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;text-align:center;">
-            <div>
-              <p style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;">Lieferung</p>
-              <p style="font-size:12px;color:var(--text-muted);">Frühjahr 2026</p>
-            </div>
-            <div>
-              <p style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;">Standort</p>
-              <p style="font-size:12px;color:var(--text-muted);">Deutschland</p>
-            </div>
-            <div>
-              <p style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;">Probefahrt</p>
-              <p style="font-size:12px;color:var(--text-muted);">Mönchengladbach</p>
-            </div>
+          <div class="grid grid-cols-3 gap-4 text-center">
+            <div><p class="font-heading text-[11px] tracking-[0.15em] uppercase text-[var(--accent)] mb-1">Lieferung</p><p class="text-xs text-[var(--text-muted)]">Frühjahr 2026</p></div>
+            <div><p class="font-heading text-[11px] tracking-[0.15em] uppercase text-[var(--accent)] mb-1">Standort</p><p class="text-xs text-[var(--text-muted)]">Deutschland</p></div>
+            <div><p class="font-heading text-[11px] tracking-[0.15em] uppercase text-[var(--accent)] mb-1">Probefahrt</p><p class="text-xs text-[var(--text-muted)]">Mönchengladbach</p></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ STATS BAR ═══ -->
-  <section class="reveal" style="padding:64px 24px;border-top:1px solid rgba(240,237,232,0.08);border-bottom:1px solid rgba(240,237,232,0.08);">
-    <div style="max-width:1280px;margin:0 auto;">
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:32px;text-align:center;">
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- 数据条：85 Nm / 9.9 kg / 150 km / 417 Wh -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <section class="reveal-section py-16 px-6 border-t border-white/10 border-b border-white/10">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
         <div><div><span class="stat-num">85</span><span class="stat-unit">Nm</span></div><p class="stat-label">Drehmoment</p></div>
         <div><div><span class="stat-num">9.9</span><span class="stat-unit">kg</span></div><p class="stat-label">Ab Gewicht*</p></div>
         <div><div><span class="stat-num">150</span><span class="stat-unit">km</span></div><p class="stat-label">Reichweite*</p></div>
         <div><div><span class="stat-num">417</span><span class="stat-unit">Wh</span></div><p class="stat-label">Akku</p></div>
       </div>
-      <p style="text-align:center;margin-top:24px;font-size:11px;color:var(--text-muted);">*Reichweite basierend auf Größe S / ca. 60 kg Fahrer. Leistungsdaten variieren je nach Konfiguration.</p>
+      <p class="text-center mt-6 text-[11px] text-[var(--text-muted)]">*Reichweite basierend auf Größe S / ca. 60 kg Fahrer. Leistungsdaten variieren je nach Konfiguration.</p>
     </div>
   </section>
 
-  <!-- ═══ PRODUKT STORY ═══ -->
-  <section class="reveal" style="padding:96px 24px;">
-    <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;" class="product-grid">
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- 产品故事 / 概念（锚点 #story） -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <section class="reveal-section py-24 px-6" id="story">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center product-grid">
       <div>
-        <p style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;">Das Konzept</p>
-        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;text-transform:uppercase;font-size:clamp(32px,4vw,52px);line-height:1;margin-bottom:32px;">Für Fahrer,<br>die beides wollen.</h2>
-        <div style="display:flex;flex-direction:column;gap:20px;font-size:15px;line-height:1.7;color:rgba(240,237,232,0.75);">
+        <p class="font-heading text-[11px] tracking-[0.2em] uppercase text-[var(--accent)] mb-6">Das Konzept</p>
+        <h2 class="font-heading font-black uppercase text-3xl md:text-4xl lg:text-5xl leading-tight mb-8">Für Fahrer,<br>die beides wollen.</h2>
+        <div class="flex flex-col gap-5 text-[15px] leading-relaxed text-white/80">
           <p>Asphalt am Morgen. Schotter am Nachmittag. Der VAPOR SL wurde für Fahrer entwickelt, die keine Kompromisse eingehen wollen — und endlich nicht mehr müssen.</p>
           <p>85 Nm Mittelmotor. Shimano 105 Di2. Illusionwheels Carbon-Laufräder. Ein Toray T800 Rahmen, der unter 10 kg bleibt, wenn du willst. Die ersten Bikes stehen jetzt in Deutschland.</p>
           <p>Werkspreise direkt. Kein Händleraufschlag.</p>
         </div>
-        <div style="display:flex;gap:16px;margin-top:40px;flex-wrap:wrap;">
+        <div class="flex gap-4 mt-10 flex-wrap">
           <a href="#vorbestellen" class="btn-primary" style="width:auto;">Jetzt reservieren</a>
           <a href="https://cosmosebike.com/test-ride" class="btn-secondary">Probefahrt</a>
         </div>
       </div>
-      <!-- HIER: Echtes Fahrtbild einfügen -->
-      <div style="background:#111;aspect-ratio:3/4;overflow:hidden;display:flex;align-items:center;justify-content:center;">
-        <p style="font-size:12px;color:var(--text-muted);text-align:center;">Fahrtbild hier einfügen</p>
+      <div class="bg-[#111] aspect-[3/4] overflow-hidden flex items-center justify-center">
+        <img src="https://cdn.shopify.com/s/files/1/0999/0694/5363/files/jxs05.jpg?v=1768736845" alt="VAPOR SL Fahrt" class="w-full h-full object-cover">
       </div>
     </div>
   </section>
 
-  <!-- ═══ TECHNISCHE DATEN ═══ -->
-  <section class="reveal" style="padding:96px 24px;border-top:1px solid rgba(240,237,232,0.08);" id="specs">
-    <div style="max-width:1280px;margin:0 auto;" x-data="{activeTab:'antrieb'}">
-      <p style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;">Vollständige Spezifikation</p>
-      <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;text-transform:uppercase;font-size:clamp(32px,4vw,48px);margin-bottom:48px;">Technische Daten</h2>
-
-      <!-- Tabs -->
-      <div style="display:flex;gap:32px;border-bottom:1px solid rgba(240,237,232,0.1);margin-bottom:32px;">
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- 技术数据（Tabs：Antrieb / Schaltung / Rahmen / Lieferung） -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <section class="reveal-section py-24 px-6 border-t border-white/10" id="specs">
+    <div class="max-w-7xl mx-auto" x-data="{activeTab:'antrieb'}">
+      <p class="font-heading text-[11px] tracking-[0.2em] uppercase text-[var(--accent)] mb-4">Vollständige Spezifikation</p>
+      <h2 class="font-heading font-black uppercase text-3xl md:text-4xl mb-12">Technische Daten</h2>
+      <div class="flex gap-8 border-b border-white/10 mb-8">
         <button class="tab-btn" :class="{active:activeTab==='antrieb'}" @click="activeTab='antrieb'">Antrieb</button>
         <button class="tab-btn" :class="{active:activeTab==='schaltung'}" @click="activeTab='schaltung'">Schaltung & Bremsen</button>
         <button class="tab-btn" :class="{active:activeTab==='rahmen'}" @click="activeTab='rahmen'">Rahmen & Laufräder</button>
         <button class="tab-btn" :class="{active:activeTab==='lieferung'}" @click="activeTab='lieferung'">Lieferung</button>
       </div>
-
-      <div style="max-width:640px;">
+      <div class="max-w-2xl">
         <div x-show="activeTab==='antrieb'">
           <div class="spec-row"><span class="spec-label">Motor</span><span class="spec-value">Mittelmotor · 85 Nm · 250W · Drehmomentsensor</span></div>
           <div class="spec-row"><span class="spec-label">Akku</span><span class="spec-value">417 Wh · vollintegriert im Unterrohr</span></div>
           <div class="spec-row"><span class="spec-label">Reichweite</span><span class="spec-value">Bis zu 150 km*</span></div>
           <div class="spec-row"><span class="spec-label">Steuerung</span><span class="spec-value">Integrierter Lenker-Controller</span></div>
-          <p style="font-size:11px;margin-top:24px;color:var(--text-muted);">*Basierend auf Größe S / ca. 60 kg / optimale Bedingungen.</p>
+          <p class="text-[11px] mt-6 text-[var(--text-muted)]">*Basierend auf Größe S / ca. 60 kg / optimale Bedingungen.</p>
         </div>
         <div x-show="activeTab==='schaltung'">
           <div class="spec-row"><span class="spec-label">Schaltwerk</span><span class="spec-value">Shimano 105 Di2 RD-R7150 · 12-fach</span></div>
@@ -297,102 +290,115 @@
     </div>
   </section>
 
-  <!-- ═══ GEOMETRIE ═══ -->
-  <section class="reveal" style="padding:96px 24px;border-top:1px solid rgba(240,237,232,0.08);" id="geometrie">
-    <div style="max-width:1280px;margin:0 auto;">
-      <p style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;">Passform</p>
-      <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;text-transform:uppercase;font-size:clamp(32px,4vw,48px);margin-bottom:48px;">Geometrie</h2>
-      <div style="overflow-x:auto;">
-        <table style="width:100%;min-width:560px;font-size:13px;">
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- 几何尺寸表（Größentabelle） -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <section class="reveal-section py-24 px-6 border-t border-white/10" id="geometrie">
+    <div class="max-w-7xl mx-auto">
+      <p class="font-heading text-[11px] tracking-[0.2em] uppercase text-[var(--accent)] mb-4">Passform</p>
+      <h2 class="font-heading font-black uppercase text-3xl md:text-4xl mb-12">Geometrie</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full min-w-[560px] text-[13px]">
           <thead>
-            <tr style="border-bottom:1px solid rgba(240,237,232,0.15);">
-              <th style="text-align:left;padding:12px 32px 12px 0;font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);font-weight:400;">Maß</th>
-              <th style="padding:12px 16px;font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);font-weight:700;">S<br><span style="color:var(--text-muted);font-size:10px;font-weight:300;">157–170cm</span></th>
-              <th style="padding:12px 16px;font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);font-weight:700;">M<br><span style="color:var(--text-muted);font-size:10px;font-weight:300;">168–180cm</span></th>
-              <th style="padding:12px 16px;font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);font-weight:700;">L<br><span style="color:var(--text-muted);font-size:10px;font-weight:300;">175–185cm</span></th>
-              <th style="padding:12px 16px;font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);font-weight:700;">XL<br><span style="color:var(--text-muted);font-size:10px;font-weight:300;">178–188cm</span></th>
+            <tr class="border-b border-white/10">
+              <th class="text-left py-3 pr-8 font-heading text-[11px] tracking-[0.15em] uppercase text-[var(--text-muted)] font-normal">Maß</th>
+              <th class="py-3 px-4 font-heading text-xs tracking-[0.1em] uppercase text-[var(--accent)] font-bold">S<br><span class="text-[var(--text-muted)] text-[10px] font-light">157–170cm</span></th>
+              <th class="py-3 px-4 font-heading text-xs tracking-[0.1em] uppercase text-[var(--accent)] font-bold">M<br><span class="text-[var(--text-muted)] text-[10px] font-light">168–180cm</span></th>
+              <th class="py-3 px-4 font-heading text-xs tracking-[0.1em] uppercase text-[var(--accent)] font-bold">L<br><span class="text-[var(--text-muted)] text-[10px] font-light">175–185cm</span></th>
+              <th class="py-3 px-4 font-heading text-xs tracking-[0.1em] uppercase text-[var(--accent)] font-bold">XL<br><span class="text-[var(--text-muted)] text-[10px] font-light">178–188cm</span></th>
             </tr>
           </thead>
-          <tbody>
-            <tr style="border-bottom:1px solid rgba(240,237,232,0.06);"><td style="padding:12px 32px 12px 0;color:var(--text-muted);font-size:12px;letter-spacing:0.05em;text-transform:uppercase;">Sattelrohr</td><td style="padding:12px 16px;text-align:center;">440mm</td><td style="padding:12px 16px;text-align:center;">470mm</td><td style="padding:12px 16px;text-align:center;">500mm</td><td style="padding:12px 16px;text-align:center;">515mm</td></tr>
-            <tr style="border-bottom:1px solid rgba(240,237,232,0.06);"><td style="padding:12px 32px 12px 0;color:var(--text-muted);font-size:12px;letter-spacing:0.05em;text-transform:uppercase;">Reach</td><td style="padding:12px 16px;text-align:center;">379mm</td><td style="padding:12px 16px;text-align:center;">391mm</td><td style="padding:12px 16px;text-align:center;">405mm</td><td style="padding:12px 16px;text-align:center;">418mm</td></tr>
-            <tr style="border-bottom:1px solid rgba(240,237,232,0.06);"><td style="padding:12px 32px 12px 0;color:var(--text-muted);font-size:12px;letter-spacing:0.05em;text-transform:uppercase;">Stack</td><td style="padding:12px 16px;text-align:center;">548mm</td><td style="padding:12px 16px;text-align:center;">554mm</td><td style="padding:12px 16px;text-align:center;">575mm</td><td style="padding:12px 16px;text-align:center;">589mm</td></tr>
-            <tr style="border-bottom:1px solid rgba(240,237,232,0.06);"><td style="padding:12px 32px 12px 0;color:var(--text-muted);font-size:12px;letter-spacing:0.05em;text-transform:uppercase;">Radstand</td><td style="padding:12px 16px;text-align:center;">1020mm</td><td style="padding:12px 16px;text-align:center;">1030mm</td><td style="padding:12px 16px;text-align:center;">1046mm</td><td style="padding:12px 16px;text-align:center;">1064mm</td></tr>
-            <tr style="border-bottom:1px solid rgba(240,237,232,0.06);"><td style="padding:12px 32px 12px 0;color:var(--text-muted);font-size:12px;letter-spacing:0.05em;text-transform:uppercase;">Steuerwinkel</td><td style="padding:12px 16px;text-align:center;">70.5°</td><td style="padding:12px 16px;text-align:center;">71°</td><td style="padding:12px 16px;text-align:center;">71.5°</td><td style="padding:12px 16px;text-align:center;">71.5°</td></tr>
-            <tr style="border-bottom:1px solid rgba(240,237,232,0.06);"><td style="padding:12px 32px 12px 0;color:var(--text-muted);font-size:12px;letter-spacing:0.05em;text-transform:uppercase;">Sitzwinkel</td><td style="padding:12px 16px;text-align:center;">74°</td><td style="padding:12px 16px;text-align:center;">74°</td><td style="padding:12px 16px;text-align:center;">74°</td><td style="padding:12px 16px;text-align:center;">74°</td></tr>
+          <tbody class="[&_tr]:border-b [&_tr]:border-white/10">
+            <tr><td class="py-3 pr-8 text-[var(--text-muted)] text-xs tracking-wide uppercase">Sattelrohr</td><td class="py-3 px-4 text-center">440mm</td><td class="py-3 px-4 text-center">470mm</td><td class="py-3 px-4 text-center">500mm</td><td class="py-3 px-4 text-center">515mm</td></tr>
+            <tr><td class="py-3 pr-8 text-[var(--text-muted)] text-xs tracking-wide uppercase">Reach</td><td class="py-3 px-4 text-center">379mm</td><td class="py-3 px-4 text-center">391mm</td><td class="py-3 px-4 text-center">405mm</td><td class="py-3 px-4 text-center">418mm</td></tr>
+            <tr><td class="py-3 pr-8 text-[var(--text-muted)] text-xs tracking-wide uppercase">Stack</td><td class="py-3 px-4 text-center">548mm</td><td class="py-3 px-4 text-center">554mm</td><td class="py-3 px-4 text-center">575mm</td><td class="py-3 px-4 text-center">589mm</td></tr>
+            <tr><td class="py-3 pr-8 text-[var(--text-muted)] text-xs tracking-wide uppercase">Radstand</td><td class="py-3 px-4 text-center">1020mm</td><td class="py-3 px-4 text-center">1030mm</td><td class="py-3 px-4 text-center">1046mm</td><td class="py-3 px-4 text-center">1064mm</td></tr>
+            <tr><td class="py-3 pr-8 text-[var(--text-muted)] text-xs tracking-wide uppercase">Steuerwinkel</td><td class="py-3 px-4 text-center">70.5°</td><td class="py-3 px-4 text-center">71°</td><td class="py-3 px-4 text-center">71.5°</td><td class="py-3 px-4 text-center">71.5°</td></tr>
+            <tr><td class="py-3 pr-8 text-[var(--text-muted)] text-xs tracking-wide uppercase">Sitzwinkel</td><td class="py-3 px-4 text-center">74°</td><td class="py-3 px-4 text-center">74°</td><td class="py-3 px-4 text-center">74°</td><td class="py-3 px-4 text-center">74°</td></tr>
           </tbody>
         </table>
       </div>
     </div>
   </section>
 
-  <!-- ═══ DERUIZ / PROBEFAHRT ═══ -->
-  <section class="reveal" style="padding:96px 24px;border-top:1px solid rgba(240,237,232,0.08);background:#0d0d0d;">
-    <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;" class="product-grid">
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- 试驾与取车（Deruiz Mönchengladbach） -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <section class="reveal-section py-24 px-6 border-t border-white/10 bg-[#0d0d0d]">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center product-grid">
       <div>
-        <p style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;">In Deutschland. Jetzt.</p>
-        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;text-transform:uppercase;font-size:clamp(32px,4vw,48px);line-height:1;margin-bottom:32px;">Probefahrt &<br>Abholung</h2>
-        <div style="display:flex;flex-direction:column;gap:16px;font-size:15px;line-height:1.7;color:rgba(240,237,232,0.75);margin-bottom:40px;">
-          <p>Die ersten VAPOR SL stehen jetzt bei unserem Partner <strong style="color:var(--warm-white);">Deruiz</strong> in Mönchengladbach. Kein Blindkauf aus dem Internet.</p>
+        <p class="font-heading text-[11px] tracking-[0.2em] uppercase text-[var(--accent)] mb-4">In Deutschland. Jetzt.</p>
+        <h2 class="font-heading font-black uppercase text-3xl md:text-4xl leading-tight mb-8">Probefahrt &<br>Abholung</h2>
+        <div class="flex flex-col gap-4 text-[15px] leading-relaxed text-white/75 mb-10">
+          <p>Die ersten VAPOR SL stehen jetzt bei unserem Partner <strong class="text-[var(--warm-white)]">Deruiz</strong> in Mönchengladbach. Kein Blindkauf aus dem Internet.</p>
           <p>Komm vorbei, fahr das Rad — und reservier direkt vor Ort.</p>
         </div>
-        <div style="padding:20px;border:1px solid rgba(200,184,154,0.2);background:rgba(200,184,154,0.04);margin-bottom:32px;">
-          <p style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">Showroom Adresse</p>
-          <p style="line-height:2;color:var(--warm-white);">Deruiz<br>Künkelstraße 43 / Hall B5<br>41063 Mönchengladbach<br><span style="color:var(--text-muted);">Bei Düsseldorf</span></p>
+        <div class="p-5 border border-blue-500/20 bg-blue-500/5 mb-8">
+          <p class="font-heading text-[11px] tracking-[0.2em] uppercase text-[var(--accent)] mb-3">Showroom Adresse</p>
+          <p class="leading-8 text-[var(--warm-white)]">Deruiz<br>Künkelstraße 43 / Hall B5<br>41063 Mönchengladbach<br><span class="text-[var(--text-muted)]">Bei Düsseldorf</span></p>
         </div>
-        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <div class="flex gap-4 flex-wrap">
           <a href="https://cosmosebike.com/test-ride" class="btn-primary" style="width:auto;">Probefahrt buchen</a>
-          <!-- HIER: WhatsApp-Nummer einfügen -->
           <a href="https://wa.me/DEINE_NUMMER" class="btn-secondary">WhatsApp</a>
         </div>
       </div>
-      <!-- Google Maps Embed hier -->
-      <div style="background:#111;height:400px;border:1px solid rgba(240,237,232,0.08);overflow:hidden;">
-        <!-- HIER: Google Maps iframe einfügen -->
-        <!-- <iframe src="https://www.google.com/maps/embed?pb=..." width="100%" height="100%" style="border:0;" allowfullscreen></iframe> -->
-        <div style="display:flex;align-items:center;justify-content:center;height:100%;flex-direction:column;gap:8px;">
-          <p style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);">Mönchengladbach · Deutschland</p>
-          <p style="font-size:11px;color:var(--text-muted);">→ Google Maps iframe hier einfügen</p>
-        </div>
+      <div class="bg-[#111] h-[400px] border border-white/10 overflow-hidden">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2499.3616305514824!2d6.449478211805605!3d51.212413532092924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b8adc60fb56767%3A0xf61eef59b7afa6e8!2sDERUIZ%20Germany%20GmbH!5e0!3m2!1sde!2sde!4v1772792930496!5m2!1sde!2sde" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Deruiz Mönchengladbach"></iframe>
       </div>
     </div>
   </section>
 
-  <!-- ═══ FINALER CTA ═══ -->
-  <section class="reveal" style="padding:96px 24px;border-top:1px solid rgba(240,237,232,0.08);">
-    <div style="max-width:640px;margin:0 auto;text-align:center;">
-      <p style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;">
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- 底部 CTA：再次强调预购 -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <section class="reveal-section py-24 px-6 border-t border-white/10">
+    <div class="max-w-2xl mx-auto text-center">
+      <p class="font-heading text-[11px] tracking-[0.2em] uppercase text-[var(--accent)] mb-6">
         <span class="stock-dot"></span>
         <span x-text="stockLeft + ' von 20 Bikes noch verfügbar'"></span>
       </p>
-      <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;text-transform:uppercase;font-size:clamp(40px,7vw,72px);line-height:0.95;margin-bottom:24px;">Dein Spot.<br>Jetzt sichern.</h2>
-      <p style="font-size:15px;line-height:1.8;color:rgba(240,237,232,0.65);margin-bottom:40px;">
-        €800 Anzahlung — wird als €1.000 auf den Kaufpreis angerechnet.<br>
-        Restbetrag €3.999 bei Lieferung oder Abholung in Mönchengladbach.
-      </p>
-      <a href="#vorbestellen" class="btn-primary" style="max-width:400px;margin:0 auto;font-size:18px;padding:22px 40px;">
-        Jetzt vorbestellen — €800
-      </a>
-      <p style="margin-top:24px;font-size:12px;color:var(--text-muted);">
-        Fragen? <a href="mailto:hello@cosmosebike.com" style="color:var(--gold);">hello@cosmosebike.com</a> · <a href="https://wa.me/DEINE_NUMMER" style="color:var(--gold);">WhatsApp</a>
-      </p>
+      <h2 class="font-heading font-black uppercase text-4xl md:text-6xl lg:text-7xl leading-tight mb-6">Dein Spot.<br>Jetzt sichern.</h2>
+      <p class="text-[15px] leading-relaxed text-white/70 mb-10">€800 Anzahlung — wird als €1.000 auf den Kaufpreis angerechnet.<br>Restbetrag €3.999 bei Lieferung oder Abholung in Mönchengladbach.</p>
+      <a href="#vorbestellen" class="btn-primary max-w-md mx-auto inline-block text-lg py-6 px-10">Jetzt vorbestellen — €800</a>
+      <p class="mt-6 text-xs text-[var(--text-muted)]">Fragen? <a href="mailto:info@cosmosebike.com" class="text-[var(--accent)]">info@cosmosebike.com</a> · <a href="https://wa.me/DEINE_NUMMER" class="text-[var(--accent)]">WhatsApp</a></p>
     </div>
   </section>
 
-  <!-- ═══ FOOTER ═══ -->
-  <footer style="border-top:1px solid rgba(240,237,232,0.08);padding:40px 24px;">
-    <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:16px;align-items:center;">
-      <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);">© 2025 Cosmosebike</span>
-      <div style="display:flex;gap:32px;">
-        <!-- PFLICHT in Deutschland: -->
-        <a href="/pages/impressum" style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;">Impressum</a>
-        <a href="/pages/datenschutz" style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;">Datenschutz</a>
-        <a href="/pages/widerruf" style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;">Widerruf</a>
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- 全站统一 FOOTER：Logo、Slogan、社媒、版权、德语法务链接 -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <footer class="w-full bg-black border-t border-white/10 py-16 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row justify-center items-center gap-12 md:gap-20 mb-12">
+        <div class="text-center md:text-left">
+          <a href="landing_page-de.html" class="block mb-3 hover:opacity-80 transition-opacity" aria-label="Cosmosebike">
+            <img src="https://cdn.shopify.com/s/files/1/0999/0694/5363/files/Group_3.png?v=1768738492" alt="Cosmosebike" class="h-4 md:h-5 w-auto object-contain invert mx-auto md:mx-0">
+          </a>
+          <p class="font-body text-gray-400 text-lg font-light">Voll dabei von der ersten Fahrt.</p>
+        </div>
+        <div class="flex items-center gap-4">
+          <a href="https://www.facebook.com/share/1BbnaEURHJ/?mibextid=wwXIfr" class="w-12 h-12 rounded-full border border-white/20 hover:border-blue-500 hover:bg-blue-500/10 transition flex items-center justify-center group" aria-label="Facebook">
+            <svg class="w-5 h-5 text-gray-400 group-hover:text-blue-500 transition" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.791-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/cosmosebike/" class="w-12 h-12 rounded-full border border-white/20 hover:border-pink-500 hover:bg-pink-500/10 transition flex items-center justify-center group" aria-label="Instagram">
+            <svg class="w-5 h-5 text-gray-400 group-hover:text-pink-500 transition" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@Cosmos_ebike" class="w-12 h-12 rounded-full border border-white/20 hover:border-red-500 hover:bg-red-500/10 transition flex items-center justify-center group" aria-label="YouTube">
+            <svg class="w-5 h-5 text-gray-400 group-hover:text-red-500 transition" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="pt-8 border-t border-white/10 text-center flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8">
+        <p class="font-body text-gray-500 text-sm">© 2026 Cosmosebike. All rights reserved.</p>
+        <div class="flex gap-8">
+          <a href="/pages/impressum" class="font-body text-xs tracking-wider uppercase text-gray-500 hover:text-gray-300 transition">Impressum</a>
+          <a href="/pages/datenschutz" class="font-body text-xs tracking-wider uppercase text-gray-500 hover:text-gray-300 transition">Datenschutz</a>
+          <a href="/pages/widerruf" class="font-body text-xs tracking-wider uppercase text-gray-500 hover:text-gray-300 transition">Widerruf</a>
+        </div>
       </div>
     </div>
   </footer>
 
-  <!-- Responsive -->
   <style>
     @media (max-width: 768px) {
       .product-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
@@ -406,66 +412,28 @@
         selectedColor: 'Moonlight',
         selectedSize: 'M',
         stockLeft: 11,
-
-        // ══ BILDER ERSETZEN ══
-        // Ersetze diese URLs durch deine echten VAPOR SL Produktfotos
         images: [
-          'https://cosmosebike.com/cdn/shop/files/vapor-sl-1.jpg',
-          'https://cosmosebike.com/cdn/shop/files/vapor-sl-2.jpg',
-          'https://cosmosebike.com/cdn/shop/files/vapor-sl-3.jpg',
-          'https://cosmosebike.com/cdn/shop/files/vapor-sl-4.jpg',
+          'https://cdn.shopify.com/s/files/1/0999/0694/5363/files/07_showroom_multi-bikes_wide-angle.jpg?v=1772790102',
+          'https://cdn.shopify.com/s/files/1/0999/0694/5363/files/33_multi-bikes_top-down.jpg?v=1772790103',
+          'https://cdn.shopify.com/s/files/1/0999/0694/5363/files/29_multi-bikes_top-down.jpg?v=1772790102',
+          'https://cdn.shopify.com/s/files/1/0999/0694/5363/files/vapor-glacier-front-transparent.png?v=1772790608',
         ],
-
-        colors: [
-          { name: 'Moonlight', label: 'Moonlight' },
-          { name: 'Eclipse',   label: 'Eclipse'   },
-          { name: 'Glacier',   label: 'Glacier'   },
-        ],
-
-        sizes: [
-          { name: 'S'  },
-          { name: 'M'  },
-          { name: 'L'  },
-          { name: 'XL' },
-        ],
-
-        // ══ LAGERBESTAND (aus core.md) ══
-        // true = verfügbar, false = nicht verfügbar
+        colors: [ { name: 'Moonlight', label: 'Moonlight' }, { name: 'Eclipse', label: 'Eclipse' }, { name: 'Glacier', label: 'Glacier' } ],
+        sizes: [ { name: 'S' }, { name: 'M' }, { name: 'L' }, { name: 'XL' } ],
         inventory: {
-          'Moonlight-S':  false,
-          'Moonlight-M':  true,
-          'Moonlight-L':  true,
-          'Moonlight-XL': false,
-          'Eclipse-S':    false,
-          'Eclipse-M':    true,
-          'Eclipse-L':    true,
-          'Eclipse-XL':   false,
-          'Glacier-S':    false,
-          'Glacier-M':    false,
-          'Glacier-L':    true,
-          'Glacier-XL':   true,
+          'Moonlight-S': false, 'Moonlight-M': true, 'Moonlight-L': true, 'Moonlight-XL': false,
+          'Eclipse-S': false, 'Eclipse-M': true, 'Eclipse-L': true, 'Eclipse-XL': false,
+          'Glacier-S': false, 'Glacier-M': false, 'Glacier-L': true, 'Glacier-XL': true,
         },
-
-        isAvailable(color, size) {
-          return this.inventory[`${color}-${size}`] === true;
-        },
-
-        // ══ PAYPAL LINK ERSETZEN ══
-        // Erstelle in PayPal einen Zahlungslink über €800
-        // und ersetze die URL hier
-        getPaypalUrl() {
-          return 'https://www.paypal.com/ncp/payment/DEIN_PAYPAL_LINK';
-        },
-
+        isAvailable(color, size) { return this.inventory[`${color}-${size}`] === true; },
+        getPaypalUrl() { return 'https://www.paypal.com/ncp/payment/DEIN_PAYPAL_LINK'; },
         init() {
-          const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-              if (e.isIntersecting) e.target.classList.add('visible');
-            });
+          var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('is-visible'); });
           }, { threshold: 0.08 });
-          document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+          document.querySelectorAll('.reveal-section').forEach(function(el) { observer.observe(el); });
         }
-      }
+      };
     }
   </script>
 </body>
