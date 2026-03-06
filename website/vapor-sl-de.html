@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VAPOR SL — Founder's Edition | Cosmosebike</title>
+  <meta name="description" content="Das leichteste e-Gravel, das du wirklich kaufen kannst. 85Nm · Shimano 105 Di2 · Carbon · ab €4,999. Jetzt in Deutschland verfügbar.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <style>
+    :root {
+      --black: #080808;
+      --warm-white: #F0EDE8;
+      --brick: #E84A2E;
+      --gold: #C8B89A;
+      --mid-gray: #2a2a2a;
+      --text-muted: #888;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--black); color: var(--warm-white); font-family: 'Barlow', sans-serif; font-weight: 300; -webkit-font-smoothing: antialiased; }
+    .font-display { font-family: 'Barlow Condensed', sans-serif; }
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .nav-sticky { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(8,8,8,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(240,237,232,0.08); }
+    .thumb { opacity: 0.45; cursor: pointer; transition: opacity 0.2s; border: 1px solid transparent; }
+    .thumb.active, .thumb:hover { opacity: 1; border-color: var(--gold); }
+    .variant-btn { border: 1px solid rgba(240,237,232,0.2); color: var(--warm-white); padding: 10px 18px; font-family: 'Barlow Condensed', sans-serif; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; background: transparent; }
+    .variant-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .variant-btn.selected { background: var(--warm-white); color: var(--black); border-color: var(--warm-white); }
+    .variant-btn.sold-out { opacity: 0.3; cursor: not-allowed; text-decoration: line-through; }
+    .btn-primary { background: var(--warm-white); color: var(--black); font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 18px 32px; width: 100%; border: none; cursor: pointer; transition: background 0.2s, transform 0.1s; display: block; text-align: center; text-decoration: none; }
+    .btn-primary:hover { background: var(--gold); transform: translateY(-1px); }
+    .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+    .btn-secondary { background: transparent; color: var(--warm-white); border: 1px solid rgba(240,237,232,0.3); font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 14px 24px; cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-block; text-align: center; }
+    .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+    .tab-btn { border-bottom: 2px solid transparent; padding: 12px 0; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; color: var(--text-muted); font-family: 'Barlow Condensed', sans-serif; background: none; border: none; border-bottom: 2px solid transparent; }
+    .tab-btn.active { color: var(--warm-white); border-bottom: 2px solid var(--gold); }
+    .spec-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid rgba(240,237,232,0.07); font-size: 14px; }
+    .spec-label { color: var(--text-muted); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .spec-value { color: var(--warm-white); text-align: right; max-width: 60%; }
+    .stat-num { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(48px, 8vw, 80px); font-weight: 900; line-height: 0.9; }
+    .stat-unit { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 400; color: var(--gold); }
+    .stat-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-top: 8px; }
+    .stock-dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; display: inline-block; margin-right: 8px; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+    .divider { border: none; border-top: 1px solid rgba(240,237,232,0.08); margin: 0; }
+    table { border-collapse: collapse; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--mid-gray); }
+  </style>
+</head>
+
+<body x-data="vaporSL()" x-init="init()">
+
+  <!-- ═══ NAV ═══ -->
+  <nav class="nav-sticky">
+    <div style="max-width:1280px;margin:0 auto;padding:16px 24px;display:flex;justify-content:space-between;align-items:center;">
+      <a href="/" style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--warm-white);text-decoration:none;">Cosmosebike</a>
+      <a href="#vorbestellen" class="btn-primary" style="width:auto;padding:10px 24px;font-size:13px;">Jetzt vorbestellen</a>
+    </div>
+  </nav>
+
+  <!-- ═══ PRODUKT HAUPTBEREICH ═══ -->
+  <section style="padding-top:80px;background:var(--black);">
+    <div style="max-width:1280px;margin:0 auto;padding:48px 24px 80px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;" class="product-grid">
+
+        <!-- LINKS: Bildergalerie -->
+        <div class="reveal">
+          <div style="position:relative;overflow:hidden;background:#111;aspect-ratio:4/3;">
+            <img :src="images[activeImage]" alt="VAPOR SL" style="width:100%;height:100%;object-fit:cover;transition:opacity 0.4s;">
+            <div style="position:absolute;top:16px;left:16px;background:rgba(8,8,8,0.85);border:1px solid rgba(200,184,154,0.3);padding:6px 14px;">
+              <span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);">Batch 01 · Founder's Edition</span>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px;">
+            <template x-for="(img, i) in images" :key="i">
+              <div class="thumb" :class="{active: activeImage === i}" @click="activeImage = i" style="aspect-ratio:1;background:#111;overflow:hidden;">
+                <img :src="img" style="width:100%;height:100%;object-fit:cover;">
+              </div>
+            </template>
+          </div>
+        </div>
+
+        <!-- RECHTS: Produktinfo + Kauf -->
+        <div class="reveal" style="transition-delay:0.15s" id="vorbestellen">
+
+          <!-- Badge -->
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+            <span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);">Cosmosebike</span>
+            <span style="color:var(--mid-gray);">·</span>
+            <span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);">
+              <span class="stock-dot"></span>
+              <span x-text="stockLeft + ' von 20 verfügbar'"></span>
+            </span>
+          </div>
+
+          <!-- Titel -->
+          <h1 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;text-transform:uppercase;font-size:clamp(40px,5vw,64px);line-height:0.95;letter-spacing:-0.01em;margin-bottom:8px;">VAPOR SL</h1>
+          <p style="font-family:'Barlow Condensed',sans-serif;font-weight:300;text-transform:uppercase;letter-spacing:0.2em;font-size:15px;color:var(--gold);margin-bottom:32px;">Ultra-lightweight e-Gravel</p>
+
+          <!-- Preis -->
+          <div style="margin-bottom:32px;">
+            <div style="display:flex;align-items:baseline;gap:16px;">
+              <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:42px;">€4.999</span>
+              <span style="font-family:'Barlow Condensed',sans-serif;font-size:18px;color:var(--text-muted);text-decoration:line-through;">€5.199</span>
+            </div>
+            <p style="font-size:13px;margin-top:4px;color:var(--gold);">Founder's Edition · €200 Ersparnis</p>
+          </div>
+
+          <hr class="divider" style="margin-bottom:32px;">
+
+          <!-- Farbe -->
+          <div style="margin-bottom:24px;">
+            <p style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px;">
+              Farbe: <span x-text="selectedColor" style="color:var(--warm-white);"></span>
+            </p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <template x-for="color in colors" :key="color.name">
+                <button class="variant-btn" :class="{selected: selectedColor === color.name}" @click="selectedColor = color.name" x-text="color.label"></button>
+              </template>
+            </div>
+          </div>
+
+          <!-- Größe -->
+          <div style="margin-bottom:32px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+              <p style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);">
+                Größe: <span x-text="selectedSize" style="color:var(--warm-white);"></span>
+              </p>
+              <a href="#geometrie" style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);text-decoration:underline;">Größentabelle ↓</a>
+            </div>
+            <div style="display:flex;gap:8px;">
+              <template x-for="size in sizes" :key="size.name">
+                <button class="variant-btn"
+                  :class="{selected: selectedSize === size.name, 'sold-out': !isAvailable(selectedColor, size.name)}"
+                  :disabled="!isAvailable(selectedColor, size.name)"
+                  @click="if(isAvailable(selectedColor, size.name)) selectedSize = size.name"
+                  x-text="size.name">
+                </button>
+              </template>
+            </div>
+          </div>
+
+          <!-- Anzahlung Logik -->
+          <div style="margin-bottom:24px;padding:20px;background:rgba(200,184,154,0.06);border:1px solid rgba(200,184,154,0.15);">
+            <p style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">Vorbestellung</p>
+            <div style="display:flex;flex-direction:column;gap:8px;font-size:14px;">
+              <div style="display:flex;justify-content:space-between;">
+                <span style="color:var(--text-muted);">Anzahlung heute</span>
+                <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;">€800</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;">
+                <span style="color:var(--text-muted);">Wird angerechnet als</span>
+                <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:var(--gold);">€1.000</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;">
+                <span style="color:var(--text-muted);">Restbetrag bei Lieferung</span>
+                <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;">€3.999</span>
+              </div>
+              <hr class="divider" style="margin:8px 0;">
+              <div style="display:flex;justify-content:space-between;">
+                <span style="color:var(--text-muted);">Gesamtpreis</span>
+                <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;">€4.999</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CTA -->
+          <template x-if="isAvailable(selectedColor, selectedSize)">
+            <a :href="getPaypalUrl()" target="_blank" class="btn-primary" style="margin-bottom:12px;">
+              Jetzt vorbestellen — €800 Anzahlung
+            </a>
+          </template>
+          <template x-if="!isAvailable(selectedColor, selectedSize)">
+            <button class="btn-primary" disabled style="margin-bottom:12px;">
+              Diese Konfiguration ist nicht verfügbar
+            </button>
+          </template>
+
+          <a href="https://cosmosebike.com/test-ride" class="btn-secondary" style="width:100%;margin-bottom:24px;">
+            Probefahrt buchen — Mönchengladbach
+          </a>
+
+          <!-- Trust -->
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;text-align:center;">
+            <div>
+              <p style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;">Lieferung</p>
+              <p style="font-size:12px;color:var(--text-muted);">Frühjahr 2026</p>
+            </div>
+            <div>
+              <p style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;">Standort</p>
+              <p style="font-size:12px;color:var(--text-muted);">Deutschland</p>
+            </div>
+            <div>
+              <p style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;">Probefahrt</p>
+              <p style="font-size:12px;color:var(--text-muted);">Mönchengladbach</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ STATS BAR ═══ -->
+  <section class="reveal" style="padding:64px 24px;border-top:1px solid rgba(240,237,232,0.08);border-bottom:1px solid rgba(240,237,232,0.08);">
+    <div style="max-width:1280px;margin:0 auto;">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:32px;text-align:center;">
+        <div><div><span class="stat-num">85</span><span class="stat-unit">Nm</span></div><p class="stat-label">Drehmoment</p></div>
+        <div><div><span class="stat-num">9.9</span><span class="stat-unit">kg</span></div><p class="stat-label">Ab Gewicht*</p></div>
+        <div><div><span class="stat-num">150</span><span class="stat-unit">km</span></div><p class="stat-label">Reichweite*</p></div>
+        <div><div><span class="stat-num">417</span><span class="stat-unit">Wh</span></div><p class="stat-label">Akku</p></div>
+      </div>
+      <p style="text-align:center;margin-top:24px;font-size:11px;color:var(--text-muted);">*Reichweite basierend auf Größe S / ca. 60 kg Fahrer. Leistungsdaten variieren je nach Konfiguration.</p>
+    </div>
+  </section>
+
+  <!-- ═══ PRODUKT STORY ═══ -->
+  <section class="reveal" style="padding:96px 24px;">
+    <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;" class="product-grid">
+      <div>
+        <p style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;">Das Konzept</p>
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;text-transform:uppercase;font-size:clamp(32px,4vw,52px);line-height:1;margin-bottom:32px;">Für Fahrer,<br>die beides wollen.</h2>
+        <div style="display:flex;flex-direction:column;gap:20px;font-size:15px;line-height:1.7;color:rgba(240,237,232,0.75);">
+          <p>Asphalt am Morgen. Schotter am Nachmittag. Der VAPOR SL wurde für Fahrer entwickelt, die keine Kompromisse eingehen wollen — und endlich nicht mehr müssen.</p>
+          <p>85 Nm Mittelmotor. Shimano 105 Di2. Illusionwheels Carbon-Laufräder. Ein Toray T800 Rahmen, der unter 10 kg bleibt, wenn du willst. Die ersten Bikes stehen jetzt in Deutschland.</p>
+          <p>Werkspreise direkt. Kein Händleraufschlag.</p>
+        </div>
+        <div style="display:flex;gap:16px;margin-top:40px;flex-wrap:wrap;">
+          <a href="#vorbestellen" class="btn-primary" style="width:auto;">Jetzt reservieren</a>
+          <a href="https://cosmosebike.com/test-ride" class="btn-secondary">Probefahrt</a>
+        </div>
+      </div>
+      <!-- HIER: Echtes Fahrtbild einfügen -->
+      <div style="background:#111;aspect-ratio:3/4;overflow:hidden;display:flex;align-items:center;justify-content:center;">
+        <p style="font-size:12px;color:var(--text-muted);text-align:center;">Fahrtbild hier einfügen</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TECHNISCHE DATEN ═══ -->
+  <section class="reveal" style="padding:96px 24px;border-top:1px solid rgba(240,237,232,0.08);" id="specs">
+    <div style="max-width:1280px;margin:0 auto;" x-data="{activeTab:'antrieb'}">
+      <p style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;">Vollständige Spezifikation</p>
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;text-transform:uppercase;font-size:clamp(32px,4vw,48px);margin-bottom:48px;">Technische Daten</h2>
+
+      <!-- Tabs -->
+      <div style="display:flex;gap:32px;border-bottom:1px solid rgba(240,237,232,0.1);margin-bottom:32px;">
+        <button class="tab-btn" :class="{active:activeTab==='antrieb'}" @click="activeTab='antrieb'">Antrieb</button>
+        <button class="tab-btn" :class="{active:activeTab==='schaltung'}" @click="activeTab='schaltung'">Schaltung & Bremsen</button>
+        <button class="tab-btn" :class="{active:activeTab==='rahmen'}" @click="activeTab='rahmen'">Rahmen & Laufräder</button>
+        <button class="tab-btn" :class="{active:activeTab==='lieferung'}" @click="activeTab='lieferung'">Lieferung</button>
+      </div>
+
+      <div style="max-width:640px;">
+        <div x-show="activeTab==='antrieb'">
+          <div class="spec-row"><span class="spec-label">Motor</span><span class="spec-value">Mittelmotor · 85 Nm · 250W · Drehmomentsensor</span></div>
+          <div class="spec-row"><span class="spec-label">Akku</span><span class="spec-value">417 Wh · vollintegriert im Unterrohr</span></div>
+          <div class="spec-row"><span class="spec-label">Reichweite</span><span class="spec-value">Bis zu 150 km*</span></div>
+          <div class="spec-row"><span class="spec-label">Steuerung</span><span class="spec-value">Integrierter Lenker-Controller</span></div>
+          <p style="font-size:11px;margin-top:24px;color:var(--text-muted);">*Basierend auf Größe S / ca. 60 kg / optimale Bedingungen.</p>
+        </div>
+        <div x-show="activeTab==='schaltung'">
+          <div class="spec-row"><span class="spec-label">Schaltwerk</span><span class="spec-value">Shimano 105 Di2 RD-R7150 · 12-fach</span></div>
+          <div class="spec-row"><span class="spec-label">Kassette</span><span class="spec-value">Shimano CS-R7100 · 11–34T</span></div>
+          <div class="spec-row"><span class="spec-label">Kurbel</span><span class="spec-value">Aluminium-Einzel · 38T</span></div>
+          <div class="spec-row"><span class="spec-label">Kette</span><span class="spec-value">Shimano 12-fach</span></div>
+          <div class="spec-row"><span class="spec-label">Bremsen</span><span class="spec-value">Shimano 105 BR-R7170 hydraulisch</span></div>
+          <div class="spec-row"><span class="spec-label">Bremsscheiben</span><span class="spec-value">Tektro Center Lock · 160mm v/h</span></div>
+        </div>
+        <div x-show="activeTab==='rahmen'">
+          <div class="spec-row"><span class="spec-label">Rahmen</span><span class="spec-value">Cosmosworks Toray T800 Carbon · Flat Mount</span></div>
+          <div class="spec-row"><span class="spec-label">Gabel</span><span class="spec-value">Cosmosworks T800 Carbon · 12×100mm</span></div>
+          <div class="spec-row"><span class="spec-label">Laufräder</span><span class="spec-value">Illusionwheels C50 Carbon · UCI-zertifiziert</span></div>
+          <div class="spec-row"><span class="spec-label">Reifen</span><span class="spec-value">Continental Terra Trail · 700×35c</span></div>
+          <div class="spec-row"><span class="spec-label">Reifenbreite</span><span class="spec-value">28c bis 42c kompatibel</span></div>
+          <div class="spec-row"><span class="spec-label">Lenker</span><span class="spec-value">RPANTAHI Carbon Split-Bar</span></div>
+          <div class="spec-row"><span class="spec-label">Sattelstütze</span><span class="spec-value">Illusion Carbon</span></div>
+          <div class="spec-row"><span class="spec-label">Sattel</span><span class="spec-value">Selle Italia NOVUS</span></div>
+          <div class="spec-row"><span class="spec-label">Größen</span><span class="spec-value">S (157–170cm) / M (168–180cm) / L (175–185cm) / XL (178–188cm)</span></div>
+        </div>
+        <div x-show="activeTab==='lieferung'">
+          <div class="spec-row"><span class="spec-label">Anzahlung</span><span class="spec-value">€800 · wird als €1.000 angerechnet</span></div>
+          <div class="spec-row"><span class="spec-label">Restbetrag</span><span class="spec-value">€3.999 bei Lieferung oder Abholung</span></div>
+          <div class="spec-row"><span class="spec-label">Gesamtpreis</span><span class="spec-value">€4.999 (statt €5.199)</span></div>
+          <div class="spec-row"><span class="spec-label">Lieferzeit</span><span class="spec-value">Frühjahr 2026</span></div>
+          <div class="spec-row"><span class="spec-label">Abholung</span><span class="spec-value">Deruiz, Künkelstraße 43 / Hall B5, 41063 Mönchengladbach</span></div>
+          <div class="spec-row"><span class="spec-label">Zahlung</span><span class="spec-value">PayPal · Weitere Optionen auf Anfrage</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ GEOMETRIE ═══ -->
+  <section class="reveal" style="padding:96px 24px;border-top:1px solid rgba(240,237,232,0.08);" id="geometrie">
+    <div style="max-width:1280px;margin:0 auto;">
+      <p style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;">Passform</p>
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;text-transform:uppercase;font-size:clamp(32px,4vw,48px);margin-bottom:48px;">Geometrie</h2>
+      <div style="overflow-x:auto;">
+        <table style="width:100%;min-width:560px;font-size:13px;">
+          <thead>
+            <tr style="border-bottom:1px solid rgba(240,237,232,0.15);">
+              <th style="text-align:left;padding:12px 32px 12px 0;font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);font-weight:400;">Maß</th>
+              <th style="padding:12px 16px;font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);font-weight:700;">S<br><span style="color:var(--text-muted);font-size:10px;font-weight:300;">157–170cm</span></th>
+              <th style="padding:12px 16px;font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);font-weight:700;">M<br><span style="color:var(--text-muted);font-size:10px;font-weight:300;">168–180cm</span></th>
+              <th style="padding:12px 16px;font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);font-weight:700;">L<br><span style="color:var(--text-muted);font-size:10px;font-weight:300;">175–185cm</span></th>
+              <th style="padding:12px 16px;font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);font-weight:700;">XL<br><span style="color:var(--text-muted);font-size:10px;font-weight:300;">178–188cm</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid rgba(240,237,232,0.06);"><td style="padding:12px 32px 12px 0;color:var(--text-muted);font-size:12px;letter-spacing:0.05em;text-transform:uppercase;">Sattelrohr</td><td style="padding:12px 16px;text-align:center;">440mm</td><td style="padding:12px 16px;text-align:center;">470mm</td><td style="padding:12px 16px;text-align:center;">500mm</td><td style="padding:12px 16px;text-align:center;">515mm</td></tr>
+            <tr style="border-bottom:1px solid rgba(240,237,232,0.06);"><td style="padding:12px 32px 12px 0;color:var(--text-muted);font-size:12px;letter-spacing:0.05em;text-transform:uppercase;">Reach</td><td style="padding:12px 16px;text-align:center;">379mm</td><td style="padding:12px 16px;text-align:center;">391mm</td><td style="padding:12px 16px;text-align:center;">405mm</td><td style="padding:12px 16px;text-align:center;">418mm</td></tr>
+            <tr style="border-bottom:1px solid rgba(240,237,232,0.06);"><td style="padding:12px 32px 12px 0;color:var(--text-muted);font-size:12px;letter-spacing:0.05em;text-transform:uppercase;">Stack</td><td style="padding:12px 16px;text-align:center;">548mm</td><td style="padding:12px 16px;text-align:center;">554mm</td><td style="padding:12px 16px;text-align:center;">575mm</td><td style="padding:12px 16px;text-align:center;">589mm</td></tr>
+            <tr style="border-bottom:1px solid rgba(240,237,232,0.06);"><td style="padding:12px 32px 12px 0;color:var(--text-muted);font-size:12px;letter-spacing:0.05em;text-transform:uppercase;">Radstand</td><td style="padding:12px 16px;text-align:center;">1020mm</td><td style="padding:12px 16px;text-align:center;">1030mm</td><td style="padding:12px 16px;text-align:center;">1046mm</td><td style="padding:12px 16px;text-align:center;">1064mm</td></tr>
+            <tr style="border-bottom:1px solid rgba(240,237,232,0.06);"><td style="padding:12px 32px 12px 0;color:var(--text-muted);font-size:12px;letter-spacing:0.05em;text-transform:uppercase;">Steuerwinkel</td><td style="padding:12px 16px;text-align:center;">70.5°</td><td style="padding:12px 16px;text-align:center;">71°</td><td style="padding:12px 16px;text-align:center;">71.5°</td><td style="padding:12px 16px;text-align:center;">71.5°</td></tr>
+            <tr style="border-bottom:1px solid rgba(240,237,232,0.06);"><td style="padding:12px 32px 12px 0;color:var(--text-muted);font-size:12px;letter-spacing:0.05em;text-transform:uppercase;">Sitzwinkel</td><td style="padding:12px 16px;text-align:center;">74°</td><td style="padding:12px 16px;text-align:center;">74°</td><td style="padding:12px 16px;text-align:center;">74°</td><td style="padding:12px 16px;text-align:center;">74°</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ DERUIZ / PROBEFAHRT ═══ -->
+  <section class="reveal" style="padding:96px 24px;border-top:1px solid rgba(240,237,232,0.08);background:#0d0d0d;">
+    <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;" class="product-grid">
+      <div>
+        <p style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;">In Deutschland. Jetzt.</p>
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;text-transform:uppercase;font-size:clamp(32px,4vw,48px);line-height:1;margin-bottom:32px;">Probefahrt &<br>Abholung</h2>
+        <div style="display:flex;flex-direction:column;gap:16px;font-size:15px;line-height:1.7;color:rgba(240,237,232,0.75);margin-bottom:40px;">
+          <p>Die ersten VAPOR SL stehen jetzt bei unserem Partner <strong style="color:var(--warm-white);">Deruiz</strong> in Mönchengladbach. Kein Blindkauf aus dem Internet.</p>
+          <p>Komm vorbei, fahr das Rad — und reservier direkt vor Ort.</p>
+        </div>
+        <div style="padding:20px;border:1px solid rgba(200,184,154,0.2);background:rgba(200,184,154,0.04);margin-bottom:32px;">
+          <p style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">Showroom Adresse</p>
+          <p style="line-height:2;color:var(--warm-white);">Deruiz<br>Künkelstraße 43 / Hall B5<br>41063 Mönchengladbach<br><span style="color:var(--text-muted);">Bei Düsseldorf</span></p>
+        </div>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+          <a href="https://cosmosebike.com/test-ride" class="btn-primary" style="width:auto;">Probefahrt buchen</a>
+          <!-- HIER: WhatsApp-Nummer einfügen -->
+          <a href="https://wa.me/DEINE_NUMMER" class="btn-secondary">WhatsApp</a>
+        </div>
+      </div>
+      <!-- Google Maps Embed hier -->
+      <div style="background:#111;height:400px;border:1px solid rgba(240,237,232,0.08);overflow:hidden;">
+        <!-- HIER: Google Maps iframe einfügen -->
+        <!-- <iframe src="https://www.google.com/maps/embed?pb=..." width="100%" height="100%" style="border:0;" allowfullscreen></iframe> -->
+        <div style="display:flex;align-items:center;justify-content:center;height:100%;flex-direction:column;gap:8px;">
+          <p style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);">Mönchengladbach · Deutschland</p>
+          <p style="font-size:11px;color:var(--text-muted);">→ Google Maps iframe hier einfügen</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FINALER CTA ═══ -->
+  <section class="reveal" style="padding:96px 24px;border-top:1px solid rgba(240,237,232,0.08);">
+    <div style="max-width:640px;margin:0 auto;text-align:center;">
+      <p style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;">
+        <span class="stock-dot"></span>
+        <span x-text="stockLeft + ' von 20 Bikes noch verfügbar'"></span>
+      </p>
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;text-transform:uppercase;font-size:clamp(40px,7vw,72px);line-height:0.95;margin-bottom:24px;">Dein Spot.<br>Jetzt sichern.</h2>
+      <p style="font-size:15px;line-height:1.8;color:rgba(240,237,232,0.65);margin-bottom:40px;">
+        €800 Anzahlung — wird als €1.000 auf den Kaufpreis angerechnet.<br>
+        Restbetrag €3.999 bei Lieferung oder Abholung in Mönchengladbach.
+      </p>
+      <a href="#vorbestellen" class="btn-primary" style="max-width:400px;margin:0 auto;font-size:18px;padding:22px 40px;">
+        Jetzt vorbestellen — €800
+      </a>
+      <p style="margin-top:24px;font-size:12px;color:var(--text-muted);">
+        Fragen? <a href="mailto:hello@cosmosebike.com" style="color:var(--gold);">hello@cosmosebike.com</a> · <a href="https://wa.me/DEINE_NUMMER" style="color:var(--gold);">WhatsApp</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer style="border-top:1px solid rgba(240,237,232,0.08);padding:40px 24px;">
+    <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:16px;align-items:center;">
+      <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);">© 2025 Cosmosebike</span>
+      <div style="display:flex;gap:32px;">
+        <!-- PFLICHT in Deutschland: -->
+        <a href="/pages/impressum" style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;">Impressum</a>
+        <a href="/pages/datenschutz" style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;">Datenschutz</a>
+        <a href="/pages/widerruf" style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;">Widerruf</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Responsive -->
+  <style>
+    @media (max-width: 768px) {
+      .product-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+    }
+  </style>
+
+  <script>
+    function vaporSL() {
+      return {
+        activeImage: 0,
+        selectedColor: 'Moonlight',
+        selectedSize: 'M',
+        stockLeft: 11,
+
+        // ══ BILDER ERSETZEN ══
+        // Ersetze diese URLs durch deine echten VAPOR SL Produktfotos
+        images: [
+          'https://cosmosebike.com/cdn/shop/files/vapor-sl-1.jpg',
+          'https://cosmosebike.com/cdn/shop/files/vapor-sl-2.jpg',
+          'https://cosmosebike.com/cdn/shop/files/vapor-sl-3.jpg',
+          'https://cosmosebike.com/cdn/shop/files/vapor-sl-4.jpg',
+        ],
+
+        colors: [
+          { name: 'Moonlight', label: 'Moonlight' },
+          { name: 'Eclipse',   label: 'Eclipse'   },
+          { name: 'Glacier',   label: 'Glacier'   },
+        ],
+
+        sizes: [
+          { name: 'S'  },
+          { name: 'M'  },
+          { name: 'L'  },
+          { name: 'XL' },
+        ],
+
+        // ══ LAGERBESTAND (aus core.md) ══
+        // true = verfügbar, false = nicht verfügbar
+        inventory: {
+          'Moonlight-S':  false,
+          'Moonlight-M':  true,
+          'Moonlight-L':  true,
+          'Moonlight-XL': false,
+          'Eclipse-S':    false,
+          'Eclipse-M':    true,
+          'Eclipse-L':    true,
+          'Eclipse-XL':   false,
+          'Glacier-S':    false,
+          'Glacier-M':    false,
+          'Glacier-L':    true,
+          'Glacier-XL':   true,
+        },
+
+        isAvailable(color, size) {
+          return this.inventory[`${color}-${size}`] === true;
+        },
+
+        // ══ PAYPAL LINK ERSETZEN ══
+        // Erstelle in PayPal einen Zahlungslink über €800
+        // und ersetze die URL hier
+        getPaypalUrl() {
+          return 'https://www.paypal.com/ncp/payment/DEIN_PAYPAL_LINK';
+        },
+
+        init() {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+              if (e.isIntersecting) e.target.classList.add('visible');
+            });
+          }, { threshold: 0.08 });
+          document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        }
+      }
+    }
+  </script>
+</body>
+</html>

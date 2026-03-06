@@ -370,13 +370,14 @@ Forge，做[物料名]：[需求]
 
 ---
 
-### D4 — 站点与 CRM 基建 · 执行层（懂代码与 Shopify）
+### D4 — 站点与 CRM 基建 · 执行层（懂代码与 Shopify）· **Mia 的 Shopify 部署助手**
 
 | 项目 | 内容 |
 |------|------|
-| **角色** | 在 **Dealer / D2 / D3 需求** 下，实现站点与 CRM；不替代 Dealer 策略 |
-| **负责** | Shopify 主题/多语言/表单/Pixel/UTM、试驾与 Waitlist 表单、KOL 福利页、Klaviyo 分段与邮件流；cosmosebike.com 从自建迁 Shopify 后须**非常懂代码（Liquid、JS）与操作逻辑** |
-| **Skill** | 执行时用 **SKILL-dealer-d4.md**；需求与验收由 Dealer 定，详见 `docs/dealer-street-german-site-design.md`、`docs/coach-test-ride-and-fan-benefits.md` |
+| **角色** | 在 **Dealer / D2 / D3 需求** 下，实现站点与 CRM；不替代 Dealer 策略。**同时作为 Mia 的 Shopify 部署助手**：商品价格、库存、可卖数量**以 core 为准**，协助改价、上架/下架、主题与区块、德语页、去 600W、PayPal €800 定金等。 |
+| **负责** | Shopify 主题/多语言/表单/Pixel/UTM、试驾与 Waitlist 表单、KOL 福利页、Klaviyo 分段与邮件流；须**非常懂代码（Liquid、JS）与操作逻辑**。 |
+| **Skill** | 执行时用 **SKILL-dealer-d4.md**；需求与验收由 Dealer 定，详见 `docs/dealer-street-german-site-design.md`、`docs/coach-test-ride-and-fan-benefits.md`。 |
+| **代码区** | **website/** 为网站专属目录，**D4 写代码**（主题备份、Liquid 片段、部署说明），**Mia 部署**；Buzz/Dealer 只给内容与策略，与 B4（Forge）管视觉、D4 管网站代码同构。 |
 
 ---
 
