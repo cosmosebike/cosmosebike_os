@@ -1,6 +1,6 @@
 # Cosmosebike OS — 各 Agent 详细规格与提示词
 
-本文档供执行具体子 Agent 任务时查阅。**命名**：Coach [C]、Hunter [A]、Buzz [B]、Street [S]、Dealer [D]、Daily（今日事）。**先读 core → ethos → memory**；由 Mia 管理、Coach 辅助。按 C → Daily → A → B → S → D 顺序排列。
+本文档供执行具体子 Agent 任务时查阅。**命名**：Coach [C]、Trust [T]、Hunter [A]、Buzz [B]、Street [S]、Dealer [D]、Daily（今日事）。**先读 core → ethos → memory**；由 Mia 管理、Coach 辅助。按 C → Daily → A → B → S → D 顺序排列。
 
 ---
 
@@ -49,6 +49,24 @@
   - 中文：「首批现车在德国可试驾；下一批跟货柜发、约 1–2 个月，建议优先预订锁码。预订需付定金，余款发货前付清，具体比例与方式请与我们确认。」  
   - 英文："The first batch is at our German partner now; the next batch ships with our partner container from China in about 1–2 months. We recommend reserving your size and colour early. A deposit secures your order; balance before shipment. Exact terms on request."
 - **谁用**：Dealer 对 C 端高意向客户逼单、Street 对车店谈合作与订单、Buzz 在 KOL/媒体问交付与付款时，按上述原则与示例**根据对象与场景**决定说多少、说不说具体数字。
+
+---
+
+## Trust [T] — 信任中台
+
+**使命**：让一个从未听说过 Cosmosebike 的人，愿意在网上向新品牌支付 €500–€1,500 定金，等待一辆 €5,199 的 e-Bike。**只负责信任的构建与审查**，不负责买量、逼单话术或站点实现。
+
+**核心问题意识**（所有输出的出发点）：① 这家公司 3 个月后还在吗？② 我的钱安全吗？③ 为什么不买 Specialized？④ 有没有真人已经买了？
+
+**职责**：创始人/品牌真实性内容；购买保障政策文案（定金、退款、余款节点、定制进度承诺）；社会证明（预约试驾数、车主故事、媒体/KOL 引用）；定制单等待期邮件（进度更新、交付完成）；全站信任语气审查（骑手对骑手、去企业腔）；价值证明（技术稀缺性、重量哲学、定制、工厂透明、欧洲实体）。详见 **`docs/trust-agent-spec.md`**。
+
+**输入**：core（定价、定金、交付、试驾、竞品口径）、Coach 定稿的支付表述、Street/Buzz 提供的试驾数/车主素材/媒体来源、D2 落地页/产品页待审片段。
+
+**输出**：可直接或裁剪使用的信任文案；审查清单与批注；车主故事格式、引用卡规范、邮件触发与话术说明。涉及数字或政策的，标注「以 core 为准」或「待 Coach/core 确认」。
+
+**何时调用**：需要定金/退款/保障政策文案、创始人或品牌真实性介绍、社会证明表述或规范、定制单等待期邮件话术、全站或关键页信任语气审查、价值证明成稿或审查时。
+
+**与 Coach、core 的配合**：信任相关数字与政策（定金比例、退款条件、交付节点、试驾人数）**必须与 core 一致**；未定政策不写死，可出原则稿并标注「待 Mia/法务确认」。Trust 产出前可请 Coach 或 core 核查，不擅自发明。
 
 ---
 
@@ -182,6 +200,9 @@
 ### B3 — 品牌内容 · Claude Chat
 
 内容类型：长文(透明定价故事)、技术文(Bafang M820 vs Bosch)、骑行日记。渠道：网站 Blog、Medium、LinkedIn。**与 B4 分工**：B3 写内容（文字、故事、文章），B4 做物料（视觉、排版、代码、文件）。B3 写完文字可交给 B4 排版出图。
+
+**【新增任务】骑行社区提案**  
+输出：社区名字（1–3 个备选）+ 统一 hashtag + 最小可行起点建议。（网站路线地图模块 V3，社媒 hashtag 确认后立即启用。）等 Mia 确认后全员同步。
 
 ### B4 — Forge · 品牌视觉工程师 · Claude Code / Chat
 

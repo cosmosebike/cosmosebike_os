@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cosmosebike — VAPOR SL (6 Styles Preview)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&family=Sofia+Sans+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   FORGE: 6 THEMES — Earthy · Swiss · Dark · Landing · Porsche · Xiaomi
+   ============================================================ */
+:root, body.theme-earthy {
+  /* 1. Earthy Explorer — 泥土远征，暖调 */
+  --bg-main: #F0EDE8;
+  --bg-card: #FFFDFC;
+  --bg-nav: rgba(240, 237, 232, 0.85);
+  --text-main: #2A2C24;
+  --text-muted: rgba(42, 44, 36, 0.6);
+  --accent: #C05746;
+  --gold: #C8B89A;
+  --border: rgba(42, 44, 36, 0.12);
+  --f-display: 'Bebas Neue', sans-serif;
+  --f-serif: 'DM Serif Display', serif;
+  --f-body: 'DM Sans', sans-serif;
+  --radius: 0px;
+  --shadow: 0 20px 40px rgba(0,0,0,0.03);
+}
+
+/* Theme 2: Swiss Minimalist */
+body.theme-swiss {
+  --bg-main: #FFFFFF;
+  --bg-card: #F8F9FA;
+  --bg-nav: rgba(255, 255, 255, 0.95);
+  --text-main: #000000;
+  --text-muted: #666666;
+  --accent: #000000; /* Pure black buttons */
+  --gold: #888888; /* Tech grey instead of gold */
+  --border: #E5E5E5;
+  --f-display: 'Inter', sans-serif; /* Harder, tech font */
+  --f-serif: 'Inter', sans-serif;
+  --f-body: 'Inter', sans-serif;
+  --shadow: none;
+}
+
+/* Theme 3: Sophisticated Dark */
+body.theme-dark {
+  --bg-main: #1C1C1E;
+  --bg-card: #2C2C2E;
+  --bg-nav: rgba(28, 28, 30, 0.85);
+  --text-main: #F0EDE8;
+  --text-muted: rgba(240, 237, 232, 0.6);
+  --accent: #C8B89A;
+  --gold: #C8B89A;
+  --border: rgba(240, 237, 232, 0.15);
+  --f-display: 'Bebas Neue', sans-serif;
+  --f-serif: 'DM Serif Display', serif;
+  --f-body: 'DM Sans', sans-serif;
+  --shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+/* Theme 4: Landing Blue — 现有 landing_page 蓝黑科技感 */
+body.theme-landing {
+  --bg-main: #000000;
+  --bg-card: #0f0f0f;
+  --bg-nav: rgba(0, 0, 0, 0.9);
+  --text-main: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.6);
+  --accent: #2563eb;
+  --gold: #60a5fa;
+  --border: rgba(255, 255, 255, 0.1);
+  --f-display: 'Sofia Sans Condensed', sans-serif;
+  --f-serif: 'Sofia Sans Condensed', sans-serif;
+  --f-body: 'Inter', sans-serif;
+  --radius: 9999px;
+  --shadow: none;
+}
+body.theme-landing .hero-title { letter-spacing: -0.03em; }
+body.theme-landing .btn-primary { border-radius: 9999px; }
+body.theme-landing .btn-secondary { border-radius: 9999px; border-color: rgba(255,255,255,0.3); }
+body.theme-landing .spec-strip { border-radius: 16px; }
+
+/* Theme 5: Porsche — 极简黑白，高精度 */
+body.theme-porsche {
+  --bg-main: #f5f5f5;
+  --bg-card: #ffffff;
+  --bg-nav: rgba(255, 255, 255, 0.95);
+  --text-main: #000000;
+  --text-muted: #666666;
+  --accent: #000000;
+  --gold: #333333;
+  --border: #e0e0e0;
+  --f-display: 'Inter', sans-serif;
+  --f-serif: 'Inter', sans-serif;
+  --f-body: 'Inter', sans-serif;
+  --radius: 0;
+  --shadow: none;
+}
+body.theme-porsche .hero-title { font-weight: 700; letter-spacing: -0.04em; font-size: clamp(56px, 7vw, 90px); }
+body.theme-porsche .hero-subtitle { font-style: normal; font-weight: 400; }
+body.theme-porsche .hero-eyebrow::before { background: #000; }
+body.theme-porsche .btn-primary { color: #fff; }
+body.theme-porsche .spec-num { font-weight: 700; letter-spacing: -0.03em; }
+
+/* Theme 6: Xiaomi Tech — 浅色科技，留白多 */
+body.theme-xiaomi {
+  --bg-main: #fafafa;
+  --bg-card: #ffffff;
+  --bg-nav: rgba(255, 255, 255, 0.98);
+  --text-main: #1a1a1a;
+  --text-muted: #666666;
+  --accent: #34C759;
+  --gold: #8e8e93;
+  --border: rgba(0, 0, 0, 0.08);
+  --f-display: 'Inter', sans-serif;
+  --f-serif: 'Inter', sans-serif;
+  --f-body: 'Inter', sans-serif;
+  --radius: 12px;
+  --shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+body.theme-xiaomi .hero-title { font-weight: 700; letter-spacing: -0.03em; font-size: clamp(52px, 6.5vw, 88px); }
+body.theme-xiaomi .hero-subtitle { font-style: normal; font-weight: 400; color: var(--text-muted); }
+body.theme-xiaomi .btn-primary { border-radius: 12px; color: #fff; }
+body.theme-xiaomi .btn-secondary { border-radius: 12px; }
+body.theme-xiaomi .spec-strip { border-radius: 16px; box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--bg-main);
+  color: var(--text-main);
+  font-family: var(--f-body);
+  font-weight: 400;
+  line-height: 1.7;
+  transition: background-color 0.5s ease, color 0.5s ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- NAVIGATION --- */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; height: 72px;
+  z-index: 100; background: var(--bg-nav);
+  backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; padding: 0 40px;
+  transition: all 0.5s ease;
+}
+.nav-inner { max-width: 1360px; width: 100%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+.nav-logo { font-family: var(--f-display); font-size: 24px; letter-spacing: 0.08em; color: var(--text-main); text-decoration: none; font-weight: 600;}
+.nav-logo span { color: var(--accent); transition: color 0.5s ease;}
+
+/* --- HERO --- */
+.hero {
+  min-height: 100vh; display: flex; align-items: center; position: relative;
+  padding-top: 72px; overflow: hidden;
+}
+.hero-content {
+  max-width: 1360px; margin: 0 auto; padding: 0 40px; width: 100%;
+  display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px;
+}
+.hero-eyebrow {
+  font-size: 12px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 24px; display: flex; align-items: center; gap: 12px;
+}
+.hero-eyebrow::before { content: ''; width: 40px; height: 1px; background: var(--accent); transition: background 0.5s ease;}
+.hero-title {
+  font-family: var(--f-display); font-size: clamp(80px, 9vw, 130px); font-weight: 700;
+  line-height: 0.9; letter-spacing: 0.02em; color: var(--text-main); margin-bottom: 16px;
+  text-transform: uppercase;
+}
+body.theme-swiss .hero-title { font-size: clamp(60px, 7vw, 100px); letter-spacing: -0.02em; }
+
+.hero-subtitle {
+  font-family: var(--f-serif); font-size: 28px; font-style: italic;
+  color: var(--gold); margin-bottom: 32px;
+}
+body.theme-swiss .hero-subtitle { font-style: normal; font-weight: 300; font-size: 24px; }
+
+.hero-desc {
+  font-size: 16px; color: var(--text-muted); max-width: 480px;
+  line-height: 1.8; margin-bottom: 48px; transition: color 0.5s ease;
+}
+
+/* --- BUTTONS --- */
+.hero-ctas { display: flex; gap: 16px; }
+.btn-primary {
+  padding: 16px 36px; background: var(--accent); color: var(--bg-main);
+  font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  text-decoration: none; border: none; cursor: pointer; transition: all 0.3s ease;
+  border-radius: var(--radius, 0);
+}
+body.theme-dark .btn-primary { color: #1C1C1E; }
+body.theme-porsche .btn-primary { color: #fff; }
+body.theme-xiaomi .btn-primary { color: #fff; }
+.btn-primary:hover { transform: translateY(-2px); opacity: 0.9; }
+
+.btn-secondary {
+  padding: 16px 36px; background: transparent; color: var(--text-main);
+  font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  border: 1px solid var(--border); text-decoration: none; cursor: pointer; transition: all 0.3s ease;
+  border-radius: var(--radius, 0);
+}
+.btn-secondary:hover { border-color: var(--text-main); }
+
+/* --- DATA STRIP --- */
+.hero-right { display: flex; flex-direction: column; justify-content: center; }
+.spec-strip {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  background: var(--bg-card); padding: 40px; border: 1px solid var(--border);
+  box-shadow: var(--shadow); transition: all 0.5s ease;
+  border-radius: var(--radius, 0);
+}
+.spec-item { border-bottom: 1px solid var(--border); padding-bottom: 16px; transition: border-color 0.5s ease;}
+.spec-num { font-family: var(--f-display); font-size: 48px; font-weight: 700; color: var(--text-main); line-height: 1; transition: color 0.5s ease;}
+body.theme-swiss .spec-num { font-size: 40px; letter-spacing: -0.03em;}
+.spec-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-top: 8px; }
+.stock-status {
+  margin-top: 24px; font-size: 12px; font-weight: 600; color: var(--text-muted);
+  display: flex; align-items: center; gap: 8px;
+}
+.stock-dot { width: 8px; height: 8px; border-radius: 50%; background: #4CAF50; }
+body.theme-swiss .stock-dot { border-radius: 0; width: 8px; height: 8px; }
+
+/* --- THEME SWITCHER UI --- */
+.theme-switcher {
+  position: fixed; bottom: 40px; right: 40px; z-index: 999;
+  background: #111; padding: 16px; border: 1px solid #333;
+  display: flex; flex-direction: column; gap: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  color: #fff; font-family: 'Inter', sans-serif;
+}
+.switcher-title { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #888;}
+.switch-btn {
+  background: transparent; color: #fff; border: 1px solid #444; padding: 10px 16px;
+  font-size: 12px; cursor: pointer; text-align: left; transition: all 0.2s;
+}
+.switch-btn:hover { background: #333; }
+.switch-btn.active { border-color: #C8B89A; color: #C8B89A; }
+</style>
+</head>
+<!--
+  6 版风格参考:
+  1 Earthy — 暖调泥土/远征感，Bebas+DM Serif
+  2 Swiss — 瑞士极简，Inter，黑白灰
+  3 Dark — 高奢暗调，金为强调色
+  4 Landing Blue — 现有 landing_page 蓝黑科技感，Sofia Condensed
+  5 Porsche — 保时捷式极简黑白，高精度无装饰
+  6 Xiaomi Tech — 小米/新势力车感，浅色+绿强调，留白多
+-->
+<body class="theme-earthy">
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">COSMOS<span>ebike</span></a>
+    <a href="#" class="btn-primary" style="padding: 10px 24px;">€5,199 · Reserve</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Ultra-lightweight e-Gravel</div>
+      <h1 class="hero-title">VAPOR<br>SL</h1>
+      <p class="hero-subtitle">Factory direct performance.</p>
+      <p class="hero-desc">
+        Shimano 105 Di2. Carbon wheels. Ultra-lightweight e-Gravel — we put the spec you'd expect on an €8k bike into one, and sell it direct.
+      </p>
+      <div class="hero-ctas">
+        <button class="btn-primary">Reserve Now</button>
+        <button class="btn-secondary">Test Ride in DE</button>
+      </div>
+    </div>
+    
+    <div class="hero-right">
+      <div class="spec-strip">
+        <div class="spec-item">
+          <div class="spec-num">9.9<span style="font-size:20px;color:var(--gold);">kg+</span></div>
+          <div class="spec-label">From Weight</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-num">150<span style="font-size:20px;color:var(--gold);">km</span></div>
+          <div class="spec-label">Max Range*</div>
+        </div>
+        <div class="spec-item" style="border-bottom:none; padding-bottom:0; padding-top:16px;">
+          <div class="spec-num" style="font-size: 32px;">105 Di2</div>
+          <div class="spec-label">Shimano 12s</div>
+        </div>
+      </div>
+      <div class="stock-status">
+        <div class="stock-dot"></div> Available to test ride · Mönchengladbach
+      </div>
+      <div style="font-size:10px; color:var(--text-muted); margin-top:8px;">
+        *Tested on S frame, ~60kg rider. Range varies.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="theme-switcher">
+  <div class="switcher-title">🎨 6 Styles (Forge)</div>
+  <button class="switch-btn active" onclick="setTheme('theme-earthy', this)">1. Earthy Explorer</button>
+  <button class="switch-btn" onclick="setTheme('theme-swiss', this)">2. Swiss Minimalist</button>
+  <button class="switch-btn" onclick="setTheme('theme-dark', this)">3. Sophisticated Dark</button>
+  <button class="switch-btn" onclick="setTheme('theme-landing', this)">4. Landing Blue</button>
+  <button class="switch-btn" onclick="setTheme('theme-porsche', this)">5. Porsche Minimal</button>
+  <button class="switch-btn" onclick="setTheme('theme-xiaomi', this)">6. Xiaomi Tech</button>
+</div>
+
+<script>
+  var themes = ['theme-earthy','theme-swiss','theme-dark','theme-landing','theme-porsche','theme-xiaomi'];
+  function setTheme(themeName, btn) {
+    document.body.classList.remove(...themes);
+    document.body.classList.add(themeName);
+    document.querySelectorAll('.switch-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+</script>
+
+</body>
+</html>

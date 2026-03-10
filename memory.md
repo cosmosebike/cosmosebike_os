@@ -36,3 +36,12 @@
 ## Agent 调用
 
 执行任务前：**core → ethos (.cursor/ethos.md) → memory**。点名示例：Hunter 出文案、Street 写 BD 邮件、Dealer 出逼单话术+试驾链接、Forge 做视觉、Coach 同步 core；**今日事**与 Mia、Coach 讨论后由 daily-todo 排优先级。
+
+---
+
+## 今日小结（2026-03-06）— 重点 Trust
+
+- **Trust [T] 建立**：与 Coach 平级，职责「让陌生人愿意付 €500–€1,500 定金」。规格见 **docs/trust-agent-spec.md**（四问、六块工作域、最小可行信任集）；**agents.md**、**SKILL.md** 已加入 Trust 与路由。
+- **Trust 审阅首页**：**docs/trust-review-test-homepage.md** — 必须改（扭矩不主推、Orbea 轮毂/中置、info@）；建议改（Trust strip 顺序、我们是谁一句、150km 免责）；§四「好的首页」、§五执行清单、§六用户路径采用方案 A（Why→Test Ride→Founder）、§七图片仅真实素材。
+- **架构与页面**：**docs/website-architecture-v1.md** §8 信任四问分工与价值证明顺序、§9 逐页规格（Home/Product/Test Ride/Waitlist/Offer/Locations/About）、§10 **Trust 关键页抽检清单**（上线前必对）。
+- **落地**：core 价值证明顺序与竞品规则已定稿；test-homepage-v2 按 Trust 审阅改文案与区块顺序，视觉对齐 landing_page。

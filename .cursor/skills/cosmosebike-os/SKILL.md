@@ -1,6 +1,6 @@
 ---
 name: cosmosebike-os
-description: Cosmosebike 出海商业化操作系统；Mia；Coach[C]、Hunter[A]、Buzz[B]（含B4 Forge视觉）、Street[S]、Dealer[D]。核心数据库 core.md 全员强制记忆。当用户涉及 Cosmosebike、Mia、Coach、Hunter、Buzz、Forge、Street、Dealer、core.md、海报、手册、HTML、IG图、VAPOR SL、付费广告、文案、KOL、车店BD、试驾、逼单、线索转化、performance、CPL、出海 时使用本技能。
+description: Cosmosebike 出海商业化操作系统；Mia；Coach[C]、Trust[T]、Hunter[A]、Buzz[B]（含B4 Forge视觉）、Street[S]、Dealer[D]。核心数据库 core.md 全员强制记忆。当用户涉及 Cosmosebike、Mia、Coach、Trust、定金、退款、社会证明、创始人故事、信任、Hunter、Buzz、Forge、Street、Dealer、core.md、海报、手册、HTML、IG图、VAPOR SL、付费广告、文案、KOL、车店BD、试驾、逼单、线索转化、performance、CPL、出海 时使用本技能。
 ---
 
 # Cosmosebike OS — 出海商业化 Agent 工作系统
@@ -26,6 +26,7 @@ description: Cosmosebike 出海商业化操作系统；Mia；Coach[C]、Hunter[A
 ```
 Mia
 ├── Coach [C]  — 系统中台，核心数据库辅助，不直接打仗
+├── Trust [T]  — 信任中台，让陌生人愿意付定金；与 Coach 平级，与全员同步
 └── 作战层
     ├── Hunter [A]  — 前端买量，Meta 抓冷流量
     ├── Buzz [B]    — 声量杠杆，媒体与 KOL
@@ -33,11 +34,12 @@ Mia
     └── Dealer [D]  — 高意向线索逼单，一击必杀；不懂投放，精通高客单价逼单话术
 ```
 
-## Coach [C] 与四大作战 Agent 速查
+## Coach [C]、Trust [T] 与四大作战 Agent 速查
 
 | 代号 | 名字 | 负责 | 子 Agent / 职责 |
 |------|------|------|-----------------|
 | **C** | **Coach** | 核心数据库辅助、懂 Mia、提醒落地、AI 系统与接入 | 无子编号 |
+| **T** | **Trust** | **信任中台**：让陌生人愿意向新品牌付 €500–€1,500 定金；所有信任相关输出（创始人/保障政策/社会证明/语气审查）的出发点；与 Coach 配合核查数字 | 无子编号；详见 docs/trust-agent-spec.md |
 | **A** | **Hunter** | 付费投放；A3→A1 数据反哺；线索交给 Dealer | A1 文案、A2 投放架构、A3 数据分析 |
 | **B** | **Buzz** | 媒体 & PR；B3 写内容，B4 Forge 做视觉物料；与 Street 协作 | B1 KOL、B2 媒体投稿、B3 品牌内容、**B4 Forge 视觉** |
 | **S** | **Street** | 线下车店、试驾；与 Buzz 协作发布与商业化反馈 | S1 车店BD、S2 试驾、S3 骑行社区 |
@@ -61,6 +63,7 @@ Mia
 ## 何时路由到哪个 Agent
 
 - **Coach [C]**：核心数据库维护与同步、AI 工具/工作流、提醒别沉迷设置要落地、把最新 AI/工具接到项目、「我这样搞对不对」。
+- **Trust [T]**：定金/退款政策文案、创始人与品牌真实性内容、社会证明（车主故事/预约数/媒体引用）、全站信任语气审查、定制单等待期邮件、价值证明（为什么不是你竞品）；**信任相关数字须经 core 核查、与 Coach 配合**。详见 docs/trust-agent-spec.md。
 - **Hunter [A]**：Meta/IG 广告文案、从图片出文案 → A1；Meta 账户、CPL 规则 → A2；Meta CSV 分析报告 → A3。
 - **Buzz [B]**：KOL/博主/媒体**分级清晰**，渠道·目的·对方能力**一对一 match**，回报**按对象设计**（长测/抽佣/特批买断，见 core），不统一用一种置换。KOL 合作 → B1；媒体投稿、新闻稿 → B2；品牌内容 → B3；**视觉物料 → B4 Forge**。调用句式：`Forge，做[物料名]：[需求]`。产品与报价从 core 取；外部价值锚点若 core 标「待考证」则不当铁板数据引用。
 - **Street [S]**：车店/KOL BD 定制邮件（扔链接生成「研究过他」的破冰信）→ S1；试驾流程、邮件 → S2；骑行俱乐部、Strava、赛事 → S3。
@@ -74,6 +77,7 @@ Mia
 4. **所有对外文案**：遵守品牌底线（禁用「便宜」「性价比」及 certified 等；600W 可写，建议与 250W rated 同写），使用 trust 锚点。
 5. **Street/Buzz 对外邮件**：定制化、「让他觉得你研究过他」；人工复制、创始人邮箱发送，不群发。
 6. **Dealer 逼单**：客户问「为什么这么贵」等时，调用竞品对比话术并从 core.md 取试驾链接，一击必杀。
+7. **Trust 与 Coach**：信任相关表述（定金、退款、交付节点、人数/数字）必须与 core 一致；Trust 产出前可请 Coach 或 core 核查，不擅自发明政策或数字。
 
 ## 详细规格与提示词模板
 
