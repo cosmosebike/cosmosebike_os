@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VAPOR SL — Specifications | Cosmosebike</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700&family=Sofia+Sans+Condensed:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0a0c;
+      --card: #141418;
+      --text: #f4f4f5;
+      --muted: rgba(244,244,245,0.65);
+      --accent: #60a5fa;
+      --border: rgba(255,255,255,0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Sofia Sans Condensed", system-ui, sans-serif;
+      font-size: 15px;
+      line-height:1.5;
+      color: var(--text);
+      background: var(--bg);
+      padding: 32px 20px 48px;
+    }
+    .wrap { max-width: 720px; margin: 0 auto; }
+    h1 {
+      font-family: Geologica, sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      letter-spacing: -0.02em;
+      margin: 0 0 8px;
+    }
+    .sub { color: var(--muted); font-size: 14px; margin-bottom: 28px; }
+    .sub a { color: var(--accent); text-decoration: none; }
+    .sub a:hover { text-decoration: underline; }
+    .price {
+      font-family: Geologica, sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      padding: 14px 18px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .ship {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 28px;
+      padding: 14px 18px;
+      background: rgba(96,165,250,0.08);
+      border: 1px solid rgba(96,165,250,0.2);
+      border-radius: 12px;
+    }
+    h2 {
+      font-family: Geologica, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 28px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    th { color: var(--muted); font-weight: 500; width: 38%; }
+    .geo-wrap { overflow-x: auto; margin-top: 8px; }
+    .geo { font-size: 12px; min-width: 560px; }
+    .geo th, .geo td { padding: 8px 10px; white-space: nowrap; }
+    .note { font-size: 12px; color: var(--muted); margin-top: 16px; line-height: 1.45; }
+    footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--muted);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    @media print {
+      body { background: #fff; color: #111; padding: 24px; }
+      .sub, th, .note, footer { color: #444; }
+      h2 { color: #2563eb; border-color: #ddd; }
+      .price, .ship { border-color: #ddd; background: #f8f8f8; }
+      th, td { border-color: #e5e5e5; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>VAPOR SL</h1>
+    <p class="sub">Factory-direct ultra-lightweight e-bike · <a href="https://www.cosmosebike.com">www.cosmosebike.com</a></p>
+
+    <div class="price">MSRP <strong>€5,199</strong> · factory-direct</div>
+
+    <div class="ship">
+      <strong>Shipping</strong> — We ship worldwide direct from China. <strong>Freight is paid by the customer.</strong> We’ll quote once we have your full address. Recent destinations include Japan, Taiwan, and the UAE. Import duties and local regulations are the buyer’s responsibility.
+    </div>
+
+    <h2>Highlights</h2>
+    <table>
+      <tr><th>Concept</th><td>Ultra-lightweight e-bike · precision mid-drive · carbon wheels</td></tr>
+      <tr><th>Weight (marketing)</th><td>From 9.9kg · Ultra-lightweight DNA (exact build weight depends on size & spec; typical 105 Di2 + C50 builds often in the <strong>11–12kg</strong> range — ask for your configuration)</td></tr>
+      <tr><th>Range</th><td>Up to ~150 km under test conditions*</td></tr>
+      <tr><th>Motor</th><td>Precision mid-drive · 250W rated</td></tr>
+      <tr><th>Drivetrain</th><td>Shimano 105 Di2 12-speed</td></tr>
+      <tr><th>Wheels</th><td>Carbon · 50mm profile (Illusionwheels C50)</td></tr>
+      <tr><th>Tyre clearance</th><td>700×28c up to ~40/42c (setup-dependent)</td></tr>
+    </table>
+    <p class="note">*Range: based on S-frame test / lighter rider; real range varies with terrain, rider weight, and pedalling.</p>
+
+    <h2>Frame & fork</h2>
+    <table>
+      <tr><th>Frame</th><td>Carbon (Toray T800) · disc · thru-axle 12×142 mm rear</td></tr>
+      <tr><th>Fork</th><td>Full carbon · disc · thru-axle 12×100 mm</td></tr>
+      <tr><th>Sizes</th><td>S / M / L / XL (see geometry)</td></tr>
+    </table>
+
+    <h2>E-system</h2>
+    <table>
+      <tr><th>Battery</th><td>Integrated down tube · 417 Wh (hidden layout)</td></tr>
+      <tr><th>Display / control</th><td>Minimal top-tube integrated control</td></tr>
+    </table>
+
+    <h2>Drivetrain & brakes</h2>
+    <table>
+      <tr><th>Shifting</th><td>Shimano 105 Di2 RD-R7150 · 12-speed</td></tr>
+      <tr><th>Cassette</th><td>Shimano CS-R7100 11–34T</td></tr>
+      <tr><th>Chainring</th><td>Single 38T (system-matched)</td></tr>
+      <tr><th>Brakes</th><td>Shimano 105 BR-R7170 hydraulic · 160 mm rotors F/R</td></tr>
+    </table>
+
+    <h2>Cockpit</h2>
+    <table>
+      <tr><th>Bar</th><td>Carbon drop bar (split / service-friendly routing)</td></tr>
+      <tr><th>Seatpost</th><td>Carbon</td></tr>
+      <tr><th>Saddle</th><td>Selle Italia NOVUS</td></tr>
+    </table>
+
+    <h2>Geometry (mm)</h2>
+    <div class="geo-wrap">
+      <table class="geo">
+        <thead>
+          <tr>
+            <th></th><th>S<br><span style="font-weight:400;color:var(--muted)">157–170</span></th>
+            <th>M<br><span style="font-weight:400;color:var(--muted)">168–180</span></th>
+            <th>L<br><span style="font-weight:400;color:var(--muted)">175–185</span></th>
+            <th>XL<br><span style="font-weight:400;color:var(--muted)">178–188</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th>Seat tube (Cf)</th><td>440</td><td>470</td><td>500</td><td>515</td></tr>
+          <tr><th>Reach</th><td>379</td><td>391</td><td>405</td><td>418</td></tr>
+          <tr><th>Stack</th><td>548</td><td>554</td><td>575</td><td>589</td></tr>
+          <tr><th>Top tube (eff.)</th><td>525</td><td>540</td><td>559</td><td>577</td></tr>
+          <tr><th>Wheelbase</th><td>1020</td><td>1030</td><td>1046</td><td>1064</td></tr>
+          <tr><th>BB drop</th><td>80</td><td>80</td><td>80</td><td>80</td></tr>
+          <tr><th>Chainstay</th><td>425</td><td>425</td><td>425</td><td>425</td></tr>
+          <tr><th>Head angle</th><td>70.5°</td><td>71°</td><td>71.5°</td><td>71.5°</td></tr>
+          <tr><th>Seat angle</th><td>74°</td><td>74°</td><td>74°</td><td>74°</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Heights cm — fitting guide only; final choice with your fitter or our team.</p>
+
+    <h2>Europe · test ride</h2>
+    <table>
+      <tr><th>Showroom</th><td>Test ride & pickup with partner showroom · Mönchengladbach, Germany (near Düsseldorf)</td></tr>
+    </table>
+
+    <footer>
+      <strong>Cosmosebike</strong><br />
+      <a href="mailto:info@cosmosebike.com">info@cosmosebike.com</a> · <a href="https://www.cosmosebike.com">www.cosmosebike.com</a><br />
+      <span style="font-size:11px;margin-top:8px;display:block">Spec sheet for customer sharing · data per Cosmosebike core product brief.</span>
+    </footer>
+  </div>
+</body>
+</html>

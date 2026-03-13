@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VAPOR SL — Specifications (v1 dark)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap" rel="stylesheet" />
+  <style>
+    @page { size: A4; margin: 0; }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #111;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* ========== v1：深色双页 · 满版图 + 半透明面板（与 v2 浅色单页区分） ========== */
+    .sheet {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto 12mm;
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+      break-after: page;
+      font-family: "Times New Roman", Times, "Literata", Georgia, "Liberation Serif", serif;
+      font-size: 14px;
+      line-height: 1.48;
+      font-weight: 400;
+      color: #f4f4f5;
+    }
+
+    .sheet:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+    .sheet__bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .sheet__veil {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.28);
+    }
+
+    .sheet__content {
+      position: relative;
+      z-index: 1;
+      min-height: 297mm;
+      padding: 9mm 11mm 11mm;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .copy-panel {
+      background: rgba(12, 14, 20, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      padding: 11mm 12mm 12mm;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(6px);
+    }
+
+    .kicker {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: #c5d0e0;
+      margin-bottom: 3mm;
+    }
+
+    h1 {
+      font-family: "Times New Roman", Times, "Literata", Georgia, serif;
+      font-size: 38px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin: 0 0 2mm;
+      line-height: 1.08;
+      color: #fff;
+    }
+
+    .tagline {
+      font-size: 15px;
+      font-weight: 400;
+      font-style: italic;
+      color: #d0d8e4;
+      margin-bottom: 7mm;
+    }
+
+    .rule {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.22);
+      margin: 0 0 7mm;
+    }
+
+    .price-block {
+      background: rgba(255, 255, 255, 0.05);
+      border-left: 3px solid rgba(150, 190, 240, 0.85);
+      padding: 5mm 6mm;
+      margin-bottom: 7mm;
+    }
+
+    .price-block strong {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #fff;
+    }
+
+    .price-block .msrp {
+      font-size: 14px;
+      opacity: 0.9;
+      margin-left: 0.25em;
+    }
+
+    .price-block .small {
+      font-size: 13px;
+      line-height: 1.52;
+      color: #dce3ed;
+      margin-top: 3.5mm;
+      font-weight: 400;
+    }
+
+    h2 {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #b8d4ff;
+      margin: 6mm 0 3.5mm;
+      padding-bottom: 2.5mm;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    table.spec {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      line-height: 1.44;
+    }
+
+    table.spec th {
+      text-align: left;
+      font-weight: 600;
+      width: 28%;
+      padding: 3mm 4mm 3mm 0;
+      vertical-align: top;
+      color: #c4d0e5;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    table.spec td {
+      padding: 3mm 0;
+      vertical-align: top;
+      color: #f2f5f9;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .note {
+      font-size: 12.5px;
+      font-style: italic;
+      color: #b0c0d4;
+      margin-top: 3.5mm;
+      line-height: 1.48;
+    }
+
+    table.geo {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+      text-align: center;
+    }
+
+    table.geo th,
+    table.geo td {
+      padding: 2.6mm 2.5mm;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #f2f5f9;
+    }
+
+    table.geo thead th {
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.07);
+      color: #fff;
+    }
+
+    table.geo tbody th {
+      text-align: left;
+      font-weight: 600;
+      color: #c4d0e5;
+      font-size: 12.5px;
+    }
+
+    footer.footer-sheet {
+      margin-top: auto;
+      padding-top: 8mm;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: #b8c8dc;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    footer.footer-sheet a { color: #d0e4ff; }
+
+    ul.adv {
+      list-style: none;
+      margin: 0 0 6mm;
+      padding: 0;
+    }
+    ul.adv li {
+      position: relative;
+      padding: 3mm 0 3mm 5mm;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 14px;
+      line-height: 1.45;
+      color: #eef2f8;
+    }
+    ul.adv li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.65em;
+      width: 3px;
+      height: 3px;
+      background: rgba(180,210,255,0.9);
+      border-radius: 50%;
+    }
+    ul.adv li strong {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #b8d4ff;
+      margin-bottom: 1.5mm;
+    }
+
+    @media screen {
+      body { padding: 16px 0 32px; }
+      .sheet { box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55); }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .sheet { margin: 0; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- v1 第 1 页：满版车图 + 深色面板 · 卖点与价格 -->
+  <section class="sheet sheet--p1">
+    <div class="sheet__bg" style="background-image:url('assets/spec-poster/page1-bike.png');"></div>
+    <div class="sheet__veil"></div>
+    <div class="sheet__content">
+      <div class="copy-panel">
+        <div class="kicker">Cosmosebike</div>
+        <h1>Vapor SL</h1>
+        <p class="tagline">Ultra-lightweight e-bike · carbon · mid-drive</p>
+        <div class="rule"></div>
+
+        <div class="price-block">
+          <strong>€5&nbsp;199</strong><span class="msrp">MSRP</span>
+          <div class="small">
+            Worldwide delivery from our build centre — Asia, Europe, Middle East, and beyond (e.g. Japan, Taiwan, UAE). Shipping quoted to your address; import and customs per destination.
+          </div>
+        </div>
+
+        <h2>At a glance</h2>
+        <ul class="adv">
+          <li><strong>Light on the road</strong>From 9.9 kg class — most mid-drive e-bikes in this league sit much heavier; yours stays closer to an acoustic bike in feel.</li>
+          <li><strong>Bafang M820</strong>Proven mid-drive, 250 W rated — natural pedal support without the bulk of a hub motor.</li>
+          <li><strong>Illusion carbon wheels</strong>Teeth Grinder C50, 50 mm — stiff, light rolling stock that matches the frame.</li>
+          <li><strong>VeloFox display</strong>Colour HD, 5 assist levels, integrated in the top tube — clean cockpit, no bulky display pod.</li>
+          <li><strong>Battery</strong>High-density pack, 417 Wh, fully hidden in the down tube — no bolt-on box, refined silhouette.</li>
+          <li><strong>Shimano 105 Di2</strong>12-speed electronic shifting — same tier you’d expect on a premium build.</li>
+          <li><strong>Tyre freedom</strong>700×28C through 40C — road day or rougher tracks, one frame.</li>
+          <li><strong>Range</strong>Up to ~150 km under stated test conditions* — long days without range anxiety.</li>
+        </ul>
+        <p class="note">*S-frame / lighter rider; terrain, weight, and pedalling affect real range.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- v1 第 2 页：骑行场景图 + 参数与几何 -->
+  <section class="sheet sheet--p2">
+    <div class="sheet__bg" style="background-image:url('assets/spec-poster/page2-rider.png');"></div>
+    <div class="sheet__veil"></div>
+    <div class="sheet__content">
+      <div class="copy-panel">
+        <div class="kicker">Specifications</div>
+        <h1 style="font-size:26px;letter-spacing:0.1em;">Technical</h1>
+        <p class="tagline">VAPOR SL — data &amp; geometry</p>
+        <div class="rule"></div>
+
+        <h2>Highlights</h2>
+        <table class="spec">
+          <tr><th>Weight</th><td>From 9.9 kg. Typical 105 Di2 + Illusion C50 often 11–12 kg (spec-dependent).</td></tr>
+          <tr><th>Range</th><td>Up to ~150 km stated test.*</td></tr>
+          <tr><th>Motor</th><td>Bafang M820 mid-drive, 250 W rated.</td></tr>
+          <tr><th>Groupset</th><td>Shimano 105 Di2, 12-speed.</td></tr>
+          <tr><th>Wheels</th><td>Illusion carbon C50, 50 mm.</td></tr>
+          <tr><th>Tire clearance</th><td>700×28C – 40C.</td></tr>
+        </table>
+        <p class="note">*See page 1 for range context.</p>
+
+        <h2>Frame · battery · display</h2>
+        <table class="spec">
+          <tr><th>Frame</th><td>Carbon T800, disc, 12×142 mm.</td></tr>
+          <tr><th>Fork</th><td>Full carbon, 12×100 mm.</td></tr>
+          <tr><th>Battery</th><td>High-density 417 Wh, integrated down tube.</td></tr>
+          <tr><th>Display</th><td><strong>VeloFox</strong> colour HD, 5 levels, top-tube integrated.</td></tr>
+        </table>
+
+        <h2>Drivetrain · brakes · cockpit</h2>
+        <table class="spec">
+          <tr><th>Shifting</th><td>105 Di2 RD-R7150.</td></tr>
+          <tr><th>Cassette / ring</th><td>11–34T, 38T.</td></tr>
+          <tr><th>Brakes</th><td>105 hydraulic, 160 mm F/R.</td></tr>
+          <tr><th>Cockpit</th><td>Carbon bar &amp; post, Selle Italia NOVUS.</td></tr>
+        </table>
+
+        <h2>Geometry mm</h2>
+        <table class="geo">
+          <thead>
+            <tr>
+              <th></th>
+              <th>S<br><span style="font-weight:400;opacity:.88">157–170</span></th>
+              <th>M<br><span style="font-weight:400;opacity:.88">168–180</span></th>
+              <th>L<br><span style="font-weight:400;opacity:.88">175–185</span></th>
+              <th>XL<br><span style="font-weight:400;opacity:.88">178–188</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th>Seat tube</th><td>440</td><td>470</td><td>500</td><td>515</td></tr>
+            <tr><th>Reach</th><td>379</td><td>391</td><td>405</td><td>418</td></tr>
+            <tr><th>Stack</th><td>548</td><td>554</td><td>575</td><td>589</td></tr>
+            <tr><th>Top tube (eff.)</th><td>525</td><td>540</td><td>559</td><td>577</td></tr>
+            <tr><th>Wheelbase</th><td>1020</td><td>1030</td><td>1046</td><td>1064</td></tr>
+            <tr><th>BB drop</th><td>80</td><td>80</td><td>80</td><td>80</td></tr>
+            <tr><th>Chainstay</th><td>425</td><td>425</td><td>425</td><td>425</td></tr>
+            <tr><th>Head angle °</th><td>70.5</td><td>71</td><td>71.5</td><td>71.5</td></tr>
+            <tr><th>Seat angle °</th><td>74</td><td>74</td><td>74</td><td>74</td></tr>
+          </tbody>
+        </table>
+
+        <p class="note" style="margin-top:4mm">Heights cm — guide only; confirm with fitter or our team.</p>
+
+        <footer class="footer-sheet">
+          Cosmosebike · <a href="mailto:info@cosmosebike.com">info@cosmosebike.com</a><br />
+          <a href="https://www.cosmosebike.com">www.cosmosebike.com</a>
+        </footer>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VAPOR SL — Cosmosebike</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet" />
+  <style>
+    @page { size: A4 portrait; margin: 0; }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #2a2a2a;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .sheet {
+      width: 210mm;
+      height: 297mm;
+      max-height: 297mm;
+      margin: 0 auto;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      background: #faf8f5;
+    }
+
+    .band {
+      flex: 0 0 56mm;
+      height: 56mm;
+      width: 100%;
+      background-size: cover;
+      background-position: center 38%;
+      position: relative;
+    }
+
+    .band::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0.15));
+    }
+
+    .band__t {
+      position: absolute;
+      left: 9mm;
+      right: 9mm;
+      bottom: 7mm;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .band__brand {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .band__name {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #fff;
+    }
+
+    .body {
+      flex: 1;
+      min-height: 0;
+      padding: 5mm 9mm 5.5mm;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .intro {
+      flex-shrink: 0;
+      margin-bottom: 3.5mm;
+      padding: 4mm 4.5mm;
+      background: linear-gradient(135deg, #f4f0ea 0%, #ebe6df 100%);
+      border-left: 3px solid #1a1a1a;
+    }
+
+    .intro__hook {
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: 12px;
+      font-weight: 600;
+      font-style: italic;
+      line-height: 1.38;
+      color: #111;
+      margin: 0 0 2.2mm;
+    }
+
+    .intro__lede {
+      font-family: "Source Serif 4", serif;
+      font-size: 9.5px;
+      line-height: 1.42;
+      color: #333;
+      margin: 0 0 2.2mm;
+    }
+
+    .intro__list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-family: "Source Serif 4", serif;
+      font-size: 9px;
+      line-height: 1.4;
+      color: #222;
+    }
+
+    .intro__list li {
+      position: relative;
+      padding-left: 3.5mm;
+      margin-bottom: 1.35mm;
+    }
+
+    .intro__list li::before {
+      content: "·";
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+      color: #111;
+    }
+
+    .row-price {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-bottom: 2.8mm;
+      margin-bottom: 2.2mm;
+      border-bottom: 2px solid #111;
+      flex-shrink: 0;
+    }
+
+    .row-price strong {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #111;
+    }
+
+    .row-price span {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: #666;
+      margin-left: 0.35em;
+    }
+
+    .ship {
+      font-family: "Source Serif 4", serif;
+      font-size: 9px;
+      line-height: 1.38;
+      color: #444;
+      margin: 0 0 2.6mm;
+      flex-shrink: 0;
+    }
+
+    h2 {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #111;
+      margin: 0 0 2.4mm;
+      flex-shrink: 0;
+    }
+
+    h2.h2-geo {
+      margin-top: 3mm;
+      margin-bottom: 2.4mm;
+    }
+
+    table.spec {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: "Source Serif 4", serif;
+      font-size: 9.25px;
+      line-height: 1.34;
+      color: #222;
+      margin-bottom: 2mm;
+      flex-shrink: 0;
+    }
+
+    table.spec th {
+      text-align: left;
+      font-weight: 600;
+      width: 26%;
+      padding: 1.45mm 2mm 1.45mm 0;
+      color: #555;
+      border-bottom: 1px solid #e5e1da;
+      vertical-align: top;
+    }
+
+    table.spec td {
+      padding: 1.45mm 0;
+      border-bottom: 1px solid #e5e1da;
+    }
+
+    table.geo {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: "Source Serif 4", serif;
+      font-size: 9.25px;
+      text-align: center;
+      color: #111;
+      margin-bottom: 1.5mm;
+      flex-shrink: 0;
+    }
+
+    table.geo th,
+    table.geo td {
+      padding: 1.45mm 1.35mm;
+      border: 1px solid #ddd9d0;
+    }
+
+    table.geo thead th {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-size: 8px;
+      font-weight: 700;
+      background: #eeeae4;
+    }
+
+    table.geo tbody th {
+      text-align: left;
+      font-weight: 600;
+      font-size: 9.25px;
+      background: #f7f4f0;
+    }
+
+    .foot {
+      margin-top: auto;
+      padding-top: 2.5mm;
+      border-top: 1px solid #e0dcd4;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-size: 8.5px;
+      color: #555;
+      text-align: center;
+      line-height: 1.45;
+      flex-shrink: 0;
+    }
+
+    .foot a { color: #0d47a1; text-decoration: none; }
+
+    @media screen {
+      body { padding: 16px; }
+      .sheet { box-shadow: 0 16px 48px rgba(0,0,0,0.3); margin-bottom: 16px; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .sheet { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="sheet">
+    <div class="band" style="background-image:url('assets/spec-poster/page1-bike.png');">
+      <div class="band__t">
+        <span class="band__brand">Cosmosebike</span>
+        <span class="band__name">VAPOR SL</span>
+      </div>
+    </div>
+
+    <div class="body">
+      <div class="intro">
+        <p class="intro__hook">Still rides like a bike — quiet power when you want it, almost nothing when you don’t.</p>
+        <p class="intro__lede">Built for long days: light under you, battery you don’t see, and nothing bulky cluttering the bar.</p>
+        <ul class="intro__list">
+          <li><strong style="font-weight:600">Mid-drive, not hub</strong> — power where you pedal, not pushing from the rear wheel.</li>
+          <li><strong style="font-weight:600">Clean silhouette</strong> — no bolt-on battery box; line from head tube to dropout stays honest.</li>
+          <li><strong style="font-weight:600">Bar stays yours</strong> — assist &amp; battery info live in the top tube (VeloFox HD, 5 levels).</li>
+          <li><strong style="font-weight:600">One frame, two worlds</strong> — 28C for road days, up to 40C when the surface turns rough.</li>
+          <li><strong style="font-weight:600">Where you are</strong> — we ship worldwide; Asia, Europe, Middle East and more.</li>
+        </ul>
+      </div>
+
+      <div class="row-price">
+        <strong>€5&nbsp;199</strong><span>MSRP</span>
+      </div>
+      <p class="ship">Worldwide shipping from our build centre — quote to your door. Japan, Taiwan, UAE and others. Import/customs per destination.</p>
+
+      <h2>Specification</h2>
+      <table class="spec">
+        <tr><th>Weight</th><td>From 9.9 kg · typical 105 Di2 + Illusion C50 often 11–12 kg</td></tr>
+        <tr><th>Range</th><td>Up to ~150 km (test: S-frame / lighter rider; varies by terrain &amp; pedalling)</td></tr>
+        <tr><th>Motor</th><td>Bafang M820 mid-drive, 250 W</td></tr>
+        <tr><th>Groupset</th><td>Shimano 105 Di2 12s</td></tr>
+        <tr><th>Wheels</th><td>Illusion carbon C50, 50 mm</td></tr>
+        <tr><th>Tyres</th><td>700×28C – 40C clearance</td></tr>
+        <tr><th>Frame / fork</th><td>T800 carbon, disc, 12×142 / 12×100 mm</td></tr>
+        <tr><th>Battery</th><td>High-density 417 Wh, integrated down tube</td></tr>
+        <tr><th>Display</th><td>VeloFox colour HD, 5 levels, top-tube</td></tr>
+        <tr><th>Drivetrain</th><td>RD-R7150 · 11–34T · 38T · 105 hydraulic 160 mm</td></tr>
+        <tr><th>Cockpit</th><td>Carbon bar &amp; post · Selle Italia NOVUS</td></tr>
+      </table>
+
+      <h2 class="h2-geo">Geometry mm</h2>
+      <table class="geo">
+        <thead>
+          <tr>
+            <th></th>
+            <th>S<br>157–170</th>
+            <th>M<br>168–180</th>
+            <th>L<br>175–185</th>
+            <th>XL<br>178–188</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th>Seat</th><td>440</td><td>470</td><td>500</td><td>515</td></tr>
+          <tr><th>Reach</th><td>379</td><td>391</td><td>405</td><td>418</td></tr>
+          <tr><th>Stack</th><td>548</td><td>554</td><td>575</td><td>589</td></tr>
+          <tr><th>TT eff.</th><td>525</td><td>540</td><td>559</td><td>577</td></tr>
+          <tr><th>WB</th><td>1020</td><td>1030</td><td>1046</td><td>1064</td></tr>
+          <tr><th>BB↓</th><td>80</td><td>80</td><td>80</td><td>80</td></tr>
+          <tr><th>CS</th><td>425</td><td>425</td><td>425</td><td>425</td></tr>
+          <tr><th>H°</th><td>70.5</td><td>71</td><td>71.5</td><td>71.5</td></tr>
+          <tr><th>S°</th><td>74</td><td>74</td><td>74</td><td>74</td></tr>
+        </tbody>
+      </table>
+
+      <div class="foot">
+        info@cosmosebike.com · <a href="https://www.cosmosebike.com">www.cosmosebike.com</a>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
